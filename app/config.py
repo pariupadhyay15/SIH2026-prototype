@@ -18,4 +18,5 @@ chat_model = HuggingFaceEndpoint(
 
 llm = ChatHuggingFace(llm=chat_model)
 
+# downloads and runs the model locally (needs sentence-transformers + torch)
 embeddings_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)

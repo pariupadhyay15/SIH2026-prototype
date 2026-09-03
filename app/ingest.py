@@ -3,11 +3,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader, UnstructuredExcelLoader
 
-from app.config import EMBEDDING_MODEL_NAME, FAISS_INDEX_PATH, embeddings_model
+from app.config import FAISS_INDEX_PATH, embeddings_model
 
 
 # ---- SWAPPABLE LOADER FUNCTION ----
-# Later, replace the INSIDE of this function to call a backend API instead.
 def load_documents(path):
     if path.lower().endswith(".pdf"):
         loader = PyPDFLoader(path)
@@ -22,14 +21,12 @@ def load_documents(path):
         return []
 
     for doc in docs:
-        # take the real filename from the loader's own metadata
         doc.metadata["source_file"] = os.path.basename(doc.metadata.get("source", path))
 
     return docs
 
 
 # ---- FILE LIST ----
-# Add every file you want the chatbot to know about here.
 file_paths = [
     r"D:\SIH2026\data\bis.pdf",
     r"D:\SIH2026\data\Sector_List.xlsx",
