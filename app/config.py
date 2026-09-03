@@ -2,12 +2,12 @@ from dotenv import load_dotenv
 from langchain_huggingface import (
     ChatHuggingFace,
     HuggingFaceEndpoint,
-    HuggingFaceEmbeddings
+    HuggingFaceEndpointEmbeddings
 )
 
 load_dotenv()
 
-EMBEDDING_MODEL_NAME = "AkshitaS/bhasha-embed-v0"
+EMBEDDING_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 FAISS_INDEX_PATH = "faiss_index"
 
 chat_model = HuggingFaceEndpoint(
@@ -18,5 +18,8 @@ chat_model = HuggingFaceEndpoint(
 
 llm = ChatHuggingFace(llm=chat_model)
 
-# downloads and runs the model locally (needs sentence-transformers + torch)
-embeddings_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL_NAME)
+# calls HF API instead of downloading the model locally
+embeddings_model = HuggingFaceEndpointEmbeddings(
+    model=EMBEDDING_MODEL_NAME,
+    task="feature-extraction"
+)
