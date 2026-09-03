@@ -1,6 +1,8 @@
+fastapi==0.141.1
 langchain_community==0.4.2
-langchain_core==1.6.0
+langchain_core==1.6.1
 langchain_huggingface==1.2.2
 langchain_text_splitters==1.1.2
-pypdf ==6.16.2
-faiss-cpu == 1.15.0
+pydantic==2.13.5
+python-dotenv==1.2.3
+uvicorn==0.52.4
