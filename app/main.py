@@ -3,10 +3,9 @@ from pydantic import BaseModel
 
 from app.rag_service import ask_question
 
-
 app = FastAPI(
-    title="BIS RAG ML Service",
-    version="1.0.0"
+    title="BIS Assistant Service",
+    version="2.0.0"
 )
 
 
