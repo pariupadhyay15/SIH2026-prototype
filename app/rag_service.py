@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from tavily import TavilyClient
 from langchain_core.prompts import PromptTemplate
 
+# Import LLM directly from your app.config module
 from app.config import llm
 
 load_dotenv()
@@ -43,6 +44,7 @@ def get_web_results(user_question, max_results=5):
             ]
         )
     except Exception as e:
+        print(f"Tavily search error: {e}")
         return [], search_query
 
     results = response.get("results", [])
@@ -64,7 +66,7 @@ def get_web_results(user_question, max_results=5):
 
 
 # ============================================================
-# CONTEXT FORMATTER
+# CONTEXT & HISTORY FORMATTERS
 # ============================================================
 
 def format_web_context(results):
@@ -82,28 +84,57 @@ def format_web_context(results):
     return "\n".join(context_parts)
 
 
+def format_chat_history(chat_history_list):
+    """
+    Converts Pydantic objects or dicts from chat_history into a clean string block.
+    Takes only the last 4 messages to preserve context without overwhelming the prompt.
+    """
+    if not chat_history_list:
+        return "No prior conversation history."
+
+    formatted = []
+    for msg in chat_history_list:
+        # Handles both Pydantic models and raw dicts safely
+        role = getattr(msg, "role", None) or (msg.get("role") if isinstance(msg, dict) else "User")
+        content = getattr(msg, "content", None) or (msg.get("content") if isinstance(msg, dict) else "")
+        role_label = "User" if str(role).lower() == "user" else "Assistant"
+        formatted.append(f"{role_label}: {content}")
+
+    return "\n".join(formatted[-4:])
+
+
 # ============================================================
-# DYNAMIC, MULTILINGUAL & CONVERSATIONAL PROMPT
+# DYNAMIC, HUMANIZED & CONVERSATIONAL PROMPT
+# ============================================================
+
+# ============================================================
+# DYNAMIC, ADAPTIVE & HUMANIZED PROMPT
 # ============================================================
 
 prompt = PromptTemplate(
     template="""
-You are BIS Sahayak, an expert assistant for the Bureau of Indian Standards (BIS).
+You are "BIS Sahayak", an authentic, direct, and helpful AI assistant for the Bureau of Indian Standards (BIS).
+Your goal is to answer questions naturally and conversationally, matching your response length directly to the user's request.
 
-Answer the user's question using ONLY the provided web evidence.
+INTENT-BASED FORMATTING RULES:
+1. YES/NO & BRIEF QUERIES (e.g., "Is this mandatory?", "What is the IS code?"):
+   - Give a direct, concise 1-2 sentence answer immediately.
+   - DO NOT use bullet points, long introductions, or detailed lists unless explicitly requested.
+   - Example: "Yes, ISI certification under IS 17803:2022 is mandatory for manufacturing and selling steel water bottles in India."
 
-CRITICAL LANGUAGE RULE:
-- Look ONLY at the USER QUESTION to determine the output language. Ignore the language of the web context.
-- If the USER QUESTION is written in English -> You MUST answer 100% in pure English.
-- If the USER QUESTION is written in Devanagari Hindi -> You MUST answer in Devanagari Hindi.
-- If the USER QUESTION is written in Hinglish (Roman script Hindi) -> You MUST answer in Hinglish.
+2. DETAILED & PROCESS REQUESTS (e.g., "List the requirements", "How do I apply?", "Explain the steps"):
+   - Use brief bullet points for clarity.
+   - Keep points short and easily scannable.
 
-ANSWER FORMATTING & LENGTH:
-- Default Behavior: Keep simple questions direct and brief (2 to 3 sentences max).
-- Detailed Requests: If the user explicitly asks for "requirements", "details", "description", "process", or "specifications", provide a clear, structured bulleted list based on the evidence.
-- Always include active IS standard numbers with revision years (e.g., IS 14756:2024).
-- Do NOT include raw web links or URLs inside your answer body text.
-- If evidence is insufficient, politely state in the user's language that official sources do not contain clear information.
+3. CONVERSATIONAL TONE:
+   - Lead directly with the answer in sentence 1. NEVER use robotic filler ("According to official sources...", "Here is a breakdown...").
+   - Conclude natural responses with a single, relevant follow-up question to keep the conversation going smoothly.
+
+4. CRITICAL LANGUAGE RULE:
+   - Match the USER QUESTION language: English -> English, Devanagari Hindi -> Devanagari Hindi, Hinglish -> Roman script Hinglish.
+
+PREVIOUS CHAT HISTORY:
+{chat_history}
 
 WEB EVIDENCE:
 {context}
@@ -113,7 +144,7 @@ USER QUESTION:
 
 ANSWER:
 """,
-    input_variables=["context", "question"]
+    input_variables=["chat_history", "context", "question"]
 )
 
 
@@ -121,21 +152,36 @@ ANSWER:
 # API INFERENCE ENGINE
 # ============================================================
 
-def ask_question(user_question):
-    # Retrieve web evidence
+def is_simple_greeting(question: str) -> bool:
+    greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"]
+    return question.strip().lower() in greetings
+
+
+def ask_question(user_question: str, chat_history_list=None):
+    if chat_history_list is None:
+        chat_history_list = []
+
+    # 1. Handle Simple Greetings
+    if is_simple_greeting(user_question):
+        greeting_reply = "Namaste! I'm your BIS Sahayak assistant. How can I help you with Indian Standards, product certifications, or lab testing today?"
+        return greeting_reply, []
+
+    # 2. Retrieve Web Evidence
     results, search_query = get_web_results(user_question)
     web_context = format_web_context(results)
+    formatted_history = format_chat_history(chat_history_list)
 
-    # Format final prompt and invoke LLM
+    # 3. Format Prompt and Invoke LLM from app.config
     final_prompt = prompt.invoke({
+        "chat_history": formatted_history,
         "context": web_context,
         "question": user_question
     })
 
     response = llm.invoke(final_prompt)
-    answer = response.content.strip()
+    answer = response.content.strip() if hasattr(response, "content") else str(response).strip()
 
-    # Extract unique source URLs for backend API JSON response
+    # 4. Extract unique source URLs
     sources = []
     for result in results:
         url = result.get("url")
