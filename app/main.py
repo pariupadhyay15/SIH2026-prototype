@@ -6,13 +6,13 @@ from app.rag_service import ask_question
 
 
 class ChatMessage(BaseModel):
-  role: str  # "user" or "assistant"
-  content: str  # The message text
+  role: str  
+  content: str  
 
 
 class ChatRequest(BaseModel):
   question: str
-  chat_history: Optional[List[ChatMessage]] = []  # Defaults to an empty list
+  chat_history: Optional[List[ChatMessage]] = []  
 
 
 app = FastAPI(title="BIS Sahayak AI Assistant")
@@ -25,8 +25,6 @@ def home():
 
 @app.post("/chat")
 def chat_endpoint(request: ChatRequest):
-  # Unpack the tuple (answer, sources) from rag_service
   answer, sources = ask_question(request.question, request.chat_history)
-
-  # Return structured JSON dictionary
+  
   return {"answer": answer, "sources": sources}

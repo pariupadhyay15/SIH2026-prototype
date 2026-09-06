@@ -7,7 +7,7 @@ from langchain_huggingface import (
 
 load_dotenv()
 
-# HuggingFace Chat Model Setup
+
 chat_model = HuggingFaceEndpoint(
     repo_id="meta-llama/Llama-3.1-8B-Instruct",
     task="text-generation",

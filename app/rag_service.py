@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from tavily import TavilyClient
 from langchain_core.prompts import PromptTemplate
 
-# Import LLM directly from your app.config module
+
 from app.config import llm
 
 load_dotenv()
@@ -15,9 +15,6 @@ if not tavily_api_key:
 tavily_client = TavilyClient(api_key=tavily_api_key)
 
 
-# ============================================================
-# TAVILY WEB SEARCH ENGINE
-# ============================================================
 
 def get_web_results(user_question, max_results=5):
     """
@@ -65,9 +62,6 @@ def get_web_results(user_question, max_results=5):
     return cleaned_results, search_query
 
 
-# ============================================================
-# CONTEXT & HISTORY FORMATTERS
-# ============================================================
 
 def format_web_context(results):
     if not results:
@@ -94,7 +88,7 @@ def format_chat_history(chat_history_list):
 
     formatted = []
     for msg in chat_history_list:
-        # Handles both Pydantic models and raw dicts safely
+        
         role = getattr(msg, "role", None) or (msg.get("role") if isinstance(msg, dict) else "User")
         content = getattr(msg, "content", None) or (msg.get("content") if isinstance(msg, dict) else "")
         role_label = "User" if str(role).lower() == "user" else "Assistant"
@@ -103,13 +97,7 @@ def format_chat_history(chat_history_list):
     return "\n".join(formatted[-4:])
 
 
-# ============================================================
-# DYNAMIC, HUMANIZED & CONVERSATIONAL PROMPT
-# ============================================================
 
-# ============================================================
-# DYNAMIC, ADAPTIVE & HUMANIZED PROMPT
-# ============================================================
 
 prompt = PromptTemplate(
     template="""
@@ -148,9 +136,7 @@ ANSWER:
 )
 
 
-# ============================================================
-# API INFERENCE ENGINE
-# ============================================================
+
 
 def is_simple_greeting(question: str) -> bool:
     greetings = ["hi", "hello", "hey", "namaste", "good morning", "good evening"]
@@ -161,17 +147,17 @@ def ask_question(user_question: str, chat_history_list=None):
     if chat_history_list is None:
         chat_history_list = []
 
-    # 1. Handle Simple Greetings
+    
     if is_simple_greeting(user_question):
         greeting_reply = "Namaste! I'm your BIS Sahayak assistant. How can I help you with Indian Standards, product certifications, or lab testing today?"
         return greeting_reply, []
 
-    # 2. Retrieve Web Evidence
+    
     results, search_query = get_web_results(user_question)
     web_context = format_web_context(results)
     formatted_history = format_chat_history(chat_history_list)
 
-    # 3. Format Prompt and Invoke LLM from app.config
+    
     final_prompt = prompt.invoke({
         "chat_history": formatted_history,
         "context": web_context,
@@ -181,7 +167,7 @@ def ask_question(user_question: str, chat_history_list=None):
     response = llm.invoke(final_prompt)
     answer = response.content.strip() if hasattr(response, "content") else str(response).strip()
 
-    # 4. Extract unique source URLs
+    
     sources = []
     for result in results:
         url = result.get("url")
