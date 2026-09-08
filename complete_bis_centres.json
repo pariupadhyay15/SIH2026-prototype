@@ -25,7 +25,7 @@
     "pincode": "700072",
     "latitude": null,
     "longitude": null,
-    "phone": "700072",
+    "phone": "",
     "email": "salesero@bis.gov.in",
     "services": [
       "Standards Information",
@@ -42,7 +42,7 @@
     "pincode": "160019",
     "latitude": null,
     "longitude": null,
-    "phone": "160 019",
+    "phone": "",
     "email": "salesnro@bis.gov.in",
     "services": [
       "Standards Information",
@@ -59,7 +59,7 @@
     "pincode": "600113",
     "latitude": null,
     "longitude": null,
-    "phone": "600 113",
+    "phone": "",
     "email": "srosales@bis.gov.in",
     "services": [
       "Standards Information",
@@ -76,7 +76,7 @@
     "pincode": "400076",
     "latitude": 19.054999,
     "longitude": 72.8692035,
-    "phone": "- 400076",
+    "phone": "",
     "email": "-wro@bis.gov.in",
     "services": [
       "Standards Information",
@@ -93,7 +93,7 @@
     "pincode": "110002",
     "latitude": 28.6664535,
     "longitude": 77.2169781,
-    "phone": "Tel : 011-23237401, 236616",
+    "phone": "011-23237401,236616",
     "email": "ddgc@bis.gov.in",
     "services": [
       "Standards Information",
@@ -110,7 +110,7 @@
     "pincode": "700091",
     "latitude": 22.9964948,
     "longitude": 87.6855882,
-    "phone": "Tel : 033-23670012",
+    "phone": "033-23670012",
     "email": "ddge@bis.gov.in",
     "services": [
       "Standards Information",
@@ -125,9 +125,9 @@
     "city": "Northern Region",
     "state": "",
     "pincode": "160019",
-    "latitude": 3.3409222,
-    "longitude": 32.6006811,
-    "phone": "Tel : 0172-2659930",
+    "latitude": null,
+    "longitude": null,
+    "phone": "0172-2659930",
     "email": "ddgn@bis.gov.in",
     "services": [
       "Standards Information",
@@ -142,9 +142,9 @@
     "city": "Southern Region",
     "state": "",
     "pincode": "600113",
-    "latitude": 35.8948878,
-    "longitude": 14.4735266,
-    "phone": "Tel : 044-22542365",
+    "latitude": null,
+    "longitude": null,
+    "phone": "044-22542365",
     "email": "ddgs@bis.gov.in",
     "services": [
       "Standards Information",
@@ -161,7 +161,7 @@
     "pincode": "400076",
     "latitude": 19.054999,
     "longitude": 72.8692035,
-    "phone": "Tel : 022-25702716, 257027",
+    "phone": "022-25702716,257027",
     "email": "ddgw@bis.gov.in",
     "services": [
       "Standards Information",
@@ -178,7 +178,7 @@
     "pincode": "462016",
     "latitude": 23.2584857,
     "longitude": 77.401989,
-    "phone": "Tel : 0755-2423453",
+    "phone": "0755-2423453",
     "email": "hbpbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -195,7 +195,7 @@
     "pincode": "201010",
     "latitude": 28.7749966,
     "longitude": 77.4586967,
-    "phone": "Tel : 0120-2771092",
+    "phone": "0120-2771092",
     "email": "hgzbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -212,7 +212,7 @@
     "pincode": "121007",
     "latitude": 28.4031478,
     "longitude": 77.3105561,
-    "phone": "Tel : 0129-2292173",
+    "phone": "0129-2292173",
     "email": "hfrbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -229,7 +229,7 @@
     "pincode": "302001",
     "latitude": 26.9154576,
     "longitude": 75.8189817,
-    "phone": "Tel : 0141-2223286",
+    "phone": "0141-2223286",
     "email": "hjpbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -246,7 +246,7 @@
     "pincode": "110002",
     "latitude": 28.6664535,
     "longitude": 77.2169781,
-    "phone": "Tel : 011-23237401",
+    "phone": "011-23237401",
     "email": "hdlbo1@bis.gov.in",
     "services": [
       "Standards Information",
@@ -263,7 +263,7 @@
     "pincode": "110002",
     "latitude": 28.6664535,
     "longitude": 77.2169781,
-    "phone": "Tel : 011-23232922",
+    "phone": "011-23232922",
     "email": "hdlbo2@bis.gov.in",
     "services": [
       "Standards Information",
@@ -280,7 +280,7 @@
     "pincode": "",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 0522-2728808",
+    "phone": "0522-2728808",
     "email": "hlkbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -297,7 +297,7 @@
     "pincode": "201309",
     "latitude": 28.5706333,
     "longitude": 77.3272147,
-    "phone": "Tel:- 0120-2979004",
+    "phone": "-0120-2979004",
     "email": "hnobo-bis@bis.gov.in",
     "services": [
       "Standards Information",
@@ -314,7 +314,7 @@
     "pincode": "160019",
     "latitude": 30.7334421,
     "longitude": 76.7797143,
-    "phone": "Tel : 01792-2650206",
+    "phone": "01792-2650206",
     "email": "hnlbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -331,7 +331,7 @@
     "pincode": "248001",
     "latitude": 30.0417376,
     "longitude": 79.089691,
-    "phone": "Tel : 135- 761 777 7281",
+    "phone": "135-7617777281",
     "email": "hdhbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -348,7 +348,7 @@
     "pincode": "181133",
     "latitude": 33.6649297,
     "longitude": 75.1629584,
-    "phone": "Tel : 01923-222690, 222696",
+    "phone": "01923-222690,222696",
     "email": "hjkbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -365,7 +365,7 @@
     "pincode": "160019",
     "latitude": 30.7334421,
     "longitude": 76.7797143,
-    "phone": "Tel :  0172-2997494",
+    "phone": "0172-2997494",
     "email": "hchbo1@bis.gov.in",
     "services": [
       "Standards Information",
@@ -382,7 +382,7 @@
     "pincode": "160019",
     "latitude": null,
     "longitude": null,
-    "phone": "2659065",
+    "phone": "",
     "email": "hhrbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -416,7 +416,7 @@
     "pincode": "800013",
     "latitude": 25.6093239,
     "longitude": 85.1235252,
-    "phone": "Tel :  0612-2275342",
+    "phone": "0612-2275342",
     "email": "hptbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -433,7 +433,7 @@
     "pincode": "751001",
     "latitude": 20.2602964,
     "longitude": 85.8394521,
-    "phone": "Tel : 0674-2390847",
+    "phone": "0674-2390847",
     "email": "hbhbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -450,7 +450,7 @@
     "pincode": "781006",
     "latitude": 26.1805978,
     "longitude": 91.753943,
-    "phone": "Tel : 0361-2226508",
+    "phone": "0361-2226508",
     "email": "hghbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -467,7 +467,7 @@
     "pincode": "700091",
     "latitude": 22.5726459,
     "longitude": 88.3638953,
-    "phone": "Tel : 033-2367-0017,\u00a0033-2",
+    "phone": "033-2367-0017,033-2",
     "email": "hkkbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -484,7 +484,7 @@
     "pincode": "492101",
     "latitude": 21.6637359,
     "longitude": 81.8406351,
-    "phone": "Tel : 0771-2412236",
+    "phone": "0771-2412236",
     "email": "hrpbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -501,7 +501,7 @@
     "pincode": "831001",
     "latitude": 22.8015194,
     "longitude": 86.2029579,
-    "phone": "Tel : 9891830363",
+    "phone": "9891830363",
     "email": "hjdbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -518,7 +518,7 @@
     "pincode": "560058",
     "latitude": 12.9767936,
     "longitude": 77.590082,
-    "phone": "Tel: 080-28395604",
+    "phone": "080-28395604",
     "email": "hbnbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -552,7 +552,7 @@
     "pincode": "641018",
     "latitude": 11.0018115,
     "longitude": 76.9628425,
-    "phone": "Tel :  0422-2248892",
+    "phone": "0422-2248892",
     "email": "hctbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -569,7 +569,7 @@
     "pincode": "682020",
     "latitude": 9.9679032,
     "longitude": 76.2444378,
-    "phone": "Tel :  0484-2207066",
+    "phone": "0484-2207066",
     "email": "hkobo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -586,7 +586,7 @@
     "pincode": "520007",
     "latitude": 16.5115306,
     "longitude": 80.6160469,
-    "phone": "Tel : 0866-3501605",
+    "phone": "0866-3501605",
     "email": "hvjbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -603,7 +603,7 @@
     "pincode": "600113",
     "latitude": 13.0836939,
     "longitude": 80.270186,
-    "phone": "Tel : 044-22541220",
+    "phone": "044-22541220",
     "email": "cnbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -620,7 +620,7 @@
     "pincode": "625008",
     "latitude": 9.9261153,
     "longitude": 78.1140983,
-    "phone": "Tel : 0452-2910334-22",
+    "phone": "0452-2910334-22",
     "email": "hmdbo-bis@bis.gov.in",
     "services": [
       "Standards Information",
@@ -637,7 +637,7 @@
     "pincode": "580009",
     "latitude": 15.3518378,
     "longitude": 75.1379848,
-    "phone": "2957898",
+    "phone": "",
     "email": "hubo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -688,7 +688,7 @@
     "pincode": "395001",
     "latitude": 21.2094892,
     "longitude": 72.8317058,
-    "phone": "Tel : 0261-2990071, 299117",
+    "phone": "0261-2990071,299117",
     "email": "headsubo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -705,7 +705,7 @@
     "pincode": "411037",
     "latitude": 18.5213738,
     "longitude": 73.8545071,
-    "phone": "Tel : 020-24264911",
+    "phone": "020-24264911",
     "email": "hpnbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -722,7 +722,7 @@
     "pincode": "360005",
     "latitude": 22.3053263,
     "longitude": 70.8028377,
-    "phone": "Tel : 0281- 2563978",
+    "phone": "0281-2563978",
     "email": "hrjbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -739,7 +739,7 @@
     "pincode": "360005",
     "latitude": 22.3053263,
     "longitude": 70.8028377,
-    "phone": "Tel : 0281-2563978",
+    "phone": "0281-2563978",
     "email": "rjbo-2@bis.gov.in",
     "services": [
       "Standards Information",
@@ -756,7 +756,7 @@
     "pincode": "440001",
     "latitude": 21.1498134,
     "longitude": 79.0820556,
-    "phone": "Tel : 0712-2540807",
+    "phone": "0712-2540807",
     "email": "hngbo@bis.gov.in",
     "services": [
       "Standards Information",
@@ -773,7 +773,7 @@
     "pincode": "400076",
     "latitude": 19.054999,
     "longitude": 72.8692035,
-    "phone": "Tel : 022-25702721",
+    "phone": "022-25702721",
     "email": "hmubo1@bis.gov.in",
     "services": [
       "Standards Information",
@@ -790,7 +790,7 @@
     "pincode": "201010",
     "latitude": 9.8015932,
     "longitude": 76.3535687,
-    "phone": "Tel : 0120-2771091-92 0120",
+    "phone": "0120-2771091-920120",
     "email": "cl@bis.gov.in",
     "services": [
       "Standards Information",
@@ -807,7 +807,7 @@
     "pincode": "700054",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 033 23209474",
+    "phone": "03323209474",
     "email": "erol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -824,7 +824,7 @@
     "pincode": "160051",
     "latitude": 30.6908804,
     "longitude": 76.7114879,
-    "phone": "Tel : 0172-4671027, 26 983",
+    "phone": "0172-4671027,26983",
     "email": "nrol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -841,7 +841,7 @@
     "pincode": "400093",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 022-28327856, 283648",
+    "phone": "022-28327856,283648",
     "email": "wrol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -858,7 +858,7 @@
     "pincode": "600113",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 044-22541208, 225410",
+    "phone": "044-22541208,225410",
     "email": "srol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -875,7 +875,7 @@
     "pincode": "560058",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 080-23721442",
+    "phone": "080-23721442",
     "email": "bnbol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -892,7 +892,7 @@
     "pincode": "800013",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 0612-2262808",
+    "phone": "0612-2262808",
     "email": "pbol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -909,7 +909,7 @@
     "pincode": "781006",
     "latitude": 26.1805978,
     "longitude": 91.753943,
-    "phone": "Tel : 0361-2525937",
+    "phone": "0361-2525937",
     "email": "gbol@bis.gov.in",
     "services": [
       "Standards Information",
@@ -926,7 +926,7 @@
     "pincode": "500040",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 9154843232, 91548432",
+    "phone": "9154843232,91548432",
     "email": "hybl@bis.gov.in",
     "services": [
       "Standards Information",
@@ -943,7 +943,7 @@
     "pincode": "181133",
     "latitude": null,
     "longitude": null,
-    "phone": "Tel : 01923-222690, 222696",
+    "phone": "01923-222690,222696",
     "email": "jk-ral@bis.gov.in",
     "services": [
       "Standards Information",
