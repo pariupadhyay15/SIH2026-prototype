@@ -17,14 +17,14 @@
     ]
   },
   {
-    "name": "6th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake  Kolkata West Bengal 700091 Tel : 033-2367-0014, 033-2367-0013, 033-2367-0012 Grams : Manaksanstha Email : ero[at]bis[dot]gov[dot]in",
+    "name": "6th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake Kolkata West Bengal 700091 Grams : Manaksanstha Email : ero[at]bis[dot]gov[dot]in",
     "centre_type": "Branch Office",
-    "address": "5 Chowringhee Approach, P. O. Princep Street, Kolkata \u2013 700072 Tel: 033- 22371085 Email : salesero[at]bis[dot]gov[dot]in",
-    "city": "6th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake  Kolkata West Bengal 700091 Tel : 033-2367-0014, 033-2367-0013, 033-2367-0012 Grams : Manaksanstha Email : ero[at]bis[dot]gov[dot]in",
+    "address": "5 Chowringhee Approach, P. O. Princep Street, Kolkata – 700072 Email : salesero[at]bis[dot]gov[dot]in",
+    "city": "Kolkata",
     "state": "",
     "pincode": "700072",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 22.5726459,
+    "longitude": 88.3638953,
     "phone": "",
     "email": "salesero@bis.gov.in",
     "services": [
@@ -34,14 +34,14 @@
     ]
   },
   {
-    "name": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. (PBX) 0172-2650206, 2650290 Fax : 0172-2650259 E-mail : nro[at]bis[dot]gov[dot]in",
+    "name": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh – 160 019. (PBX) 0172-2650206, 2650290 Fax : 0172-2650259 E-mail : nro[at]bis[dot]gov[dot]in",
     "centre_type": "Branch Office",
-    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. Tel : 0172 2659031 E-mail : salesnro[at]bis[dot]gov[dot]in",
-    "city": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. (PBX) 0172-2650206, 2650290 Fax : 0172-2650259 E-mail : nro[at]bis[dot]gov[dot]in",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh – 160 019. E-mail : salesnro[at]bis[dot]gov[dot]in",
+    "city": "Chandigarh",
     "state": "",
     "pincode": "160019",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 30.7334421,
+    "longitude": 76.7797143,
     "phone": "",
     "email": "salesnro@bis.gov.in",
     "services": [
@@ -51,14 +51,14 @@
     ]
   },
   {
-    "name": "C.I.T. Campus, IV Cross Road, Chennai 600 113. Tel : 044-22541442, 22541216, 22542519 Fax : 91-044-22541087 Email : sro[at]bis[dot]gov[dot]in",
+    "name": "C.I.T. Campus, IV Cross Road, Chennai 600 113. Fax : 91-044-22541087 Email : sro[at]bis[dot]gov[dot]in",
     "centre_type": "Branch Office",
-    "address": "IV Cross Road, Chennai 600 113. Tel :  044-25541442 & 22541216 E-mail :srosales[at]bis[dot]gov[dot]in",
-    "city": "C.I.T. Campus, IV Cross Road, Chennai 600 113. Tel : 044-22541442, 22541216, 22542519 Fax : 91-044-22541087 Email : sro[at]bis[dot]gov[dot]in",
+    "address": "IV Cross Road, Chennai 600 113. & 22541216 E-mail :srosales[at]bis[dot]gov[dot]in",
+    "city": "Chennai",
     "state": "",
     "pincode": "600113",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 13.0836939,
+    "longitude": 80.270186,
     "phone": "",
     "email": "srosales@bis.gov.in",
     "services": [
@@ -68,9 +68,9 @@
     ]
   },
   {
-    "name": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 Tel : 25700030 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
+    "name": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
     "centre_type": "Branch Office",
-    "address": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 Tel : 25700030 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
+    "address": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
     "city": "Mumbai",
     "state": "Maharashtra",
     "pincode": "400076",
@@ -87,7 +87,7 @@
   {
     "name": "Central Regional Office",
     "centre_type": "Regional Office",
-    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "address": "601/A, Konnectus Tower-1 6th Floor, DMRC Building, Bhavbhuti Marg, New Delhi-110002",
     "city": "Delhi",
     "state": "Delhi",
     "pincode": "110002",
@@ -121,12 +121,12 @@
   {
     "name": "Northern Region Office",
     "centre_type": "Regional Office",
-    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh – 160 019.",
     "city": "Northern Region",
     "state": "",
     "pincode": "160019",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 3.3409222,
+    "longitude": 32.6006811,
     "phone": "0172-2659930",
     "email": "ddgn@bis.gov.in",
     "services": [
@@ -142,8 +142,8 @@
     "city": "Southern Region",
     "state": "",
     "pincode": "600113",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 35.8948878,
+    "longitude": 14.4735266,
     "phone": "044-22542365",
     "email": "ddgs@bis.gov.in",
     "services": [
@@ -240,7 +240,7 @@
   {
     "name": "Delhi (DLBO-I) Branch Office",
     "centre_type": "Branch Office",
-    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "address": "601/A, Konnectus Tower-1 6th Floor, DMRC Building, Bhavbhuti Marg, New Delhi-110002",
     "city": "Delhi",
     "state": "Delhi",
     "pincode": "110002",
@@ -257,7 +257,7 @@
   {
     "name": "Delhi (DLBO-II) Branch Office",
     "centre_type": "Branch Office",
-    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "address": "601/A, Konnectus Tower-1 6th Floor, DMRC Building, Bhavbhuti Marg, New Delhi-110002",
     "city": "Delhi",
     "state": "Delhi",
     "pincode": "110002",
@@ -275,11 +275,11 @@
     "name": "Lucknow Branch Office Regional Telecom Traning Centre, BSNL Building, Sector-G, LDA Colony, Ashiana Lucknow-226012 (U.P.)",
     "centre_type": "Branch Office",
     "address": "SUDHEER BISHNOI Scientist-F & Head",
-    "city": "Lucknow  Regional Telecom Traning Centre, BSNL Building, Sector-G, LDA Colony, Ashiana Lucknow-226012 (U.P.)",
+    "city": "Lucknow",
     "state": "",
     "pincode": "",
-    "latitude": null,
-    "longitude": null,
+    "latitude": 26.8381,
+    "longitude": 80.9346001,
     "phone": "0522-2728808",
     "email": "hlkbo@bis.gov.in",
     "services": [
@@ -342,7 +342,7 @@
   {
     "name": "Jammu & Kashmir Branch Office",
     "centre_type": "Branch Office",
-    "address": "Lane No. 4, SIDCO Industrial Complex, Bari Brahmana, Jammu \u2013 181133 (J&K)",
+    "address": "Lane No. 4, SIDCO Industrial Complex, Bari Brahmana, Jammu – 181133 (J&K)",
     "city": "Jammu & Kashmir",
     "state": "",
     "pincode": "181133",
@@ -376,7 +376,7 @@
   {
     "name": "Haryana (HRBO) Branch Office",
     "centre_type": "Branch Office",
-    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh – 160 019.",
     "city": "Haryana (HRBO)",
     "state": "",
     "pincode": "160019",
@@ -393,7 +393,7 @@
   {
     "name": "Panipat (PPBO) Branch Office",
     "centre_type": "Branch Office",
-    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh – 160 019.",
     "city": "Panipat (PPBO)",
     "state": "",
     "pincode": "160019",
@@ -478,7 +478,7 @@
   {
     "name": "Raipur Branch Office",
     "centre_type": "Branch Office",
-    "address": "Manakalaya, Plot No. 13-C, Sector-24, Nava Raipur \u2013 Atal Nagar, Chhattisgarh- 492101",
+    "address": "Manakalaya, Plot No. 13-C, Sector-24, Nava Raipur – Atal Nagar, Chhattisgarh- 492101",
     "city": "Chhattisgarh",
     "state": "",
     "pincode": "492101",
@@ -512,7 +512,7 @@
   {
     "name": "Bengaluru Branch Office",
     "centre_type": "Branch Office",
-    "address": "Peenya Industrial Area 1st Stage, Bangaluru \u2013 Tumkur Road Bangaluru 560 058",
+    "address": "Peenya Industrial Area 1st Stage, Bangaluru – Tumkur Road Bangaluru 560 058",
     "city": "Bengaluru",
     "state": "",
     "pincode": "560058",
@@ -631,7 +631,7 @@
   {
     "name": "Hubli Branch Office",
     "centre_type": "Branch Office",
-    "address": "Ist Floor, KSFC building, Hubli-Dharwad Highway, Rayapur, Dharwad, Karnataka \u2013 580009",
+    "address": "Ist Floor, KSFC building, Hubli-Dharwad Highway, Rayapur, Dharwad, Karnataka – 580009",
     "city": "Hubli",
     "state": "",
     "pincode": "580009",
@@ -682,7 +682,7 @@
   {
     "name": "Surat Branch Office",
     "centre_type": "Branch Office",
-    "address": "Surat Branch Office First Floor, Doorsanchar Bhavan Karimabad Admin Building, God Dod Road, Surat- 395001 Shri Vikrant Scientist-E & Head Tel : 0261-2990071, 2991171,2992271 Email: headsubo[at]bis[dot]gov[dot]in",
+    "address": "Surat Branch Office First Floor, Doorsanchar Bhavan Karimabad Admin Building, God Dod Road, Surat- 395001 Shri Vikrant Scientist-E & Head Email: headsubo[at]bis[dot]gov[dot]in",
     "city": "Surat",
     "state": "",
     "pincode": "395001",
@@ -750,7 +750,7 @@
   {
     "name": "Nagpur Branch Office",
     "centre_type": "Branch Office",
-    "address": "Bureau of Indian Standards Nagpur Branch Office Indian Bureau of Mines, Block \u2018A\u2019 & \u2018D\u2019,8th Floor, Indira Bhavan, Civil Lines, Nagpur-440001, Maharashtra",
+    "address": "Bureau of Indian Standards Nagpur Branch Office Indian Bureau of Mines, Block ‘A’ & ‘D’,8th Floor, Indira Bhavan, Civil Lines, Nagpur-440001, Maharashtra",
     "city": "Nagpur",
     "state": "",
     "pincode": "440001",
@@ -937,8 +937,8 @@
   {
     "name": "Jammu Kashmir Branch Laboratory",
     "centre_type": "Testing Laboratory",
-    "address": "Lane No.4, SIDCO Industrial Complex, Bari Brahmana, Jammu \u2013 181133 (J&K)",
-    "city": "Jammu Kashmir Branch Laboratory",
+    "address": "Lane No.4, SIDCO Industrial Complex, Bari Brahmana, Jammu – 181133 (J&K)",
+    "city": "Unknown",
     "state": "",
     "pincode": "181133",
     "latitude": null,
