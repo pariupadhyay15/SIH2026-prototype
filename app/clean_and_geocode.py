@@ -3,7 +3,7 @@ import re
 import time
 from geopy.geocoders import Nominatim
 
-# Initialize free OpenStreetMap Geocoder
+
 geolocator = Nominatim(user_agent="bis_centre_cleaner")
 
 INPUT_FILE = "complete_bis_centres.json"
@@ -14,7 +14,7 @@ def clean_text(text: str) -> str:
   """Removes line breaks, emails, phone numbers, and extra spaces from strings."""
   if not text:
     return ""
-  # Remove emails and phone numbers injected into address/city strings
+
   text = re.sub(
       r"[a-zA-Z0-9._%+-]+\[at\][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", "", text
   )
@@ -28,7 +28,7 @@ def extract_clean_city(centre: dict) -> str:
   name = centre.get("name", "")
   city = centre.get("city", "")
 
-  # If city field contains long scraped text, pull city name from the Centre Name
+
   if len(city) > 30 or "Tel" in city or "Plot" in city:
     for word in [
         "Bangalore",
@@ -77,12 +77,12 @@ def main():
   geocoded_count = 0
 
   for centre in centres:
-    # 1. Clean messy strings
+    
     centre["name"] = clean_text(centre.get("name", ""))
     centre["address"] = clean_text(centre.get("address", ""))
     centre["city"] = extract_clean_city(centre)
 
-    # 2. Fix missing or null coordinates automatically
+
     c_lat = centre.get("latitude")
     c_lon = centre.get("longitude")
 
@@ -98,12 +98,12 @@ def main():
       else:
         print(f" -> Could not automatically locate {centre['name']}")
 
-      # Rate limiting for free Nominatim API (1 request per second)
+   
       time.sleep(1)
 
     cleaned_count += 1
 
-  # Save updated dataset
+ 
   with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(centres, f, indent=2, ensure_ascii=False)
 

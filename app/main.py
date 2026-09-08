@@ -14,7 +14,7 @@ from app.rag_service import ask_question
 from app.schemas import HUIDRequest, LicenseRequest, VerificationResponse
 
 
-# --- Pydantic Schemas ---
+
 class ChatMessage(BaseModel):
   role: str
   content: str
@@ -25,10 +25,10 @@ class ChatRequest(BaseModel):
   chat_history: Optional[List[ChatMessage]] = []
 
 
-# --- FastAPI App Initialization ---
+
 app = FastAPI(title="BIS Sahayak AI Assistant")
 
-# --- CORS Middleware Setup (Fixes "Failed to Fetch") ---
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -43,14 +43,14 @@ def home():
   return {"status": "BIS Sahayak API is running online!"}
 
 
-# --- RAG Chatbot Endpoint ---
+
 @app.post("/chat")
 def chat_endpoint(request: ChatRequest):
   answer, sources = ask_question(request.question, request.chat_history)
   return {"answer": answer, "sources": sources}
 
 
-# --- Verification Endpoints ---
+
 @app.post("/verify/huid", response_model=VerificationResponse)
 def verify_huid(request: HUIDRequest):
   huid_code = request.huid
@@ -98,7 +98,7 @@ def verify_license(request: LicenseRequest):
   )
 
 
-# --- Geolocation Helpers ---
+
 def haversine_distance(
     lat1: float, lon1: float, lat2: float, lon2: float
 ) -> float:
@@ -114,7 +114,7 @@ def haversine_distance(
       * math.sin(dlon / 2) ** 2
   )
 
-  # Floating-point domain guard against math error
+
   a = min(1.0, max(0.0, a))
   c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
   return R * c
@@ -131,7 +131,7 @@ def load_bis_centres():
   return []
 
 
-# --- BIS Centre Locator Endpoint ---
+
 @app.get("/bis-centres")
 def get_bis_centres(
     city: Optional[str] = Query(None),
@@ -142,7 +142,7 @@ def get_bis_centres(
   centres = load_bis_centres()
   filtered = []
 
-  # Priority 1: GPS Coordinate Radius Filtering
+  
   if lat is not None and lon is not None:
     for centre in centres:
       c_lat = centre.get("latitude")
@@ -155,7 +155,7 @@ def get_bis_centres(
           centre_entry["distance_km"] = round(dist, 2)
           filtered.append(centre_entry)
 
-    # Sort nearest to furthest
+    
     filtered.sort(key=lambda x: x["distance_km"])
 
   # Priority 2: City Name Filter
@@ -165,7 +165,7 @@ def get_bis_centres(
       if city_clean in centre.get("city", "").lower():
         filtered.append(centre)
 
-  # Priority 3: Fallback (Return All)
+  
   else:
     filtered = centres
 
