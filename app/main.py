@@ -153,7 +153,39 @@ def get_bis_centres(
 
 from app.mock_compliance_db import MOCK_COMPLIANCE_DB
 
+@app.get("/compliance/products")
+def get_compliance_products():
+  """Returns summary list of available demo products for UI cards."""
+  products_summary = [
+      {
+          "product_id": key,
+          "product_name": data["product_name"],
+          "category": data["category"],
+      }
+      for key, data in MOCK_COMPLIANCE_DB.items()
+  ]
+  return {"success": True, "products": products_summary}
 
+
+@app.get("/compliance/journey/{product_id}")
+def get_compliance_journey(product_id: str):
+  clean_key = product_id.strip().upper()
+
+  if clean_key in MOCK_COMPLIANCE_DB:
+    return {
+        "success": True,
+        "message": "Compliance journey retrieved successfully",
+        "data": MOCK_COMPLIANCE_DB[clean_key],
+    }
+
+  return {
+      "success": False,
+      "message": (
+          f"Product ID '{product_id}' not found. Available products:"
+          " PROD-EARBUDS, PROD-SPEAKER, PROD-SMARTWATCH."
+      ),
+      "data": None,
+  }
 
 
 @app.get("/compliance/journey/{product_id}")
