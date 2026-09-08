@@ -14,12 +14,31 @@ if not tavily_api_key:
 tavily_client = TavilyClient(api_key=tavily_api_key)
 
 
-def get_web_results(user_question, max_results=5):
-  """Constructs targeted queries to retrieve active, official BIS standards, QCOs, and amendments."""
+def get_web_results(user_question: str, max_results: int = 5):
+  """Constructs targeted search queries to retrieve active, official BIS standards, QCOs, amendments, and detailed technical parameters."""
+  # Append technical keywords if user explicitly asks for detailed engineering specs
+  detail_keywords = ""
+  lowered = user_question.lower()
+  if any(
+      k in lowered
+      for k in [
+          "detail",
+          "specification",
+          "thickness",
+          "limit",
+          "parameter",
+          "test",
+          "material",
+          "requirement",
+          "grade",
+      ]
+  ):
+    detail_keywords = "material grades testing parameters requirements limits"
+
   search_query = (
       f"Bureau of Indian Standards BIS active latest revision amended IS"
-      f" standard QCO {user_question}"
-  )
+      f" standard QCO {user_question} {detail_keywords}"
+  ).strip()
 
   try:
     response = tavily_client.search(
@@ -33,6 +52,8 @@ def get_web_results(user_question, max_results=5):
             "crsbis.in",
             "pib.gov.in",
             "egazette.gov.in",
+            "corpbiz.io",
+            "alephindia.in",
         ],
     )
   except Exception as e:
@@ -53,7 +74,7 @@ def get_web_results(user_question, max_results=5):
   return cleaned_results, search_query
 
 
-def format_web_context(results):
+def format_web_context(results: list) -> str:
   if not results:
     return "No relevant information was retrieved from official BIS web sources."
 
@@ -68,11 +89,10 @@ def format_web_context(results):
   return "\n".join(context_parts)
 
 
-def format_chat_history(chat_history_list):
+def format_chat_history(chat_history_list: list) -> str:
   """Converts Pydantic objects or dicts from chat_history into a clean string block.
 
-  Takes only the last 4 messages to preserve context without overwhelming the
-  prompt.
+  Takes the last 4 messages to preserve context without bloating the prompt.
   """
   if not chat_history_list:
     return "No prior conversation history."
@@ -91,19 +111,21 @@ def format_chat_history(chat_history_list):
   return "\n".join(formatted[-4:])
 
 
-# --- DYNAMIC CONVERSATIONAL PROMPT TEMPLATE ---
+# --- DYNAMIC & ADAPTIVE CONVERSATIONAL PROMPT TEMPLATE ---
 prompt = PromptTemplate(
     template="""
 You are "BIS Sahayak", an authentic, direct, and helpful AI consultant for the Bureau of Indian Standards (BIS).
 Your goal is to guide manufacturers through a natural, step-by-step dialogue without sounding repetitive or robotic.
 
 CRITICAL DIALOGUE RULES:
-1. DYNAMIC OPENINGS (NO FIXED PREFIXES): NEVER start responses with fixed template phrases like "Don't worry", "That's a great product idea", "That's straightforward", or "According to...". Jump directly into the answer naturally and vary your phrasing every single time.
-2. NO INFO DUMPS: Provide 2-3 concise sentences max for simple queries. Introduce specific IS codes directly, but save exhaustive testing parameters or multi-step lists for follow-up turns.
+1. DYNAMIC OPENINGS (NO FIXED PREFIXES): NEVER start responses with fixed template phrases like "Don't worry", "That's a great product idea", "That's straightforward", or "According to...". Jump directly into the answer naturally and vary your phrasing every time.
+2. ADAPTIVE DETAIL LEVEL:
+   - For general/broad questions ("What standard applies to X?", "What is the IS code for Y?"): Keep answers concise (2-3 sentences max) to prevent info-dumping.
+   - For explicit detail requests ("Tell me in detail", "What are the exact specifications/limits/thickness?", "What are the testing parameters?"): Extract and list all exact numeric specs, testing values, material grades, and parameters found in the WEB EVIDENCE.
 3. ADAPTIVE TONE:
-   - For factual questions ("What is the IS code for X?"): Answer directly with the standard number and a brief 1-sentence description.
-   - For complex concerns ("I am struggling with lab audits"): Offer brief, grounded reassurance before answering.
-4. GUIDING FOLLOW-UP QUESTION: End with a single, relevant follow-up question to keep the conversation moving (e.g., asking about their production location, scale, or specific standard variant).
+   - For factual queries: Answer directly with codes, specs, and metrics.
+   - For complex/anxious concerns: Offer brief, grounded reassurance before answering.
+4. GUIDING FOLLOW-UP QUESTION: End with a single, relevant follow-up question to keep the conversation moving forward (e.g., asking about production scale, factory location, or specific standard variant).
 5. MATCH LANGUAGE: Match the user's language (English -> English, Devanagari Hindi -> Devanagari Hindi, Hinglish -> Hinglish).
 
 PREVIOUS CHAT HISTORY:
