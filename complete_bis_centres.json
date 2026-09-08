@@ -1,0 +1,954 @@
+[
+  {
+    "name": "Administrative Office",
+    "centre_type": "Branch Office",
+    "address": "Sales Point",
+    "city": "Administrative",
+    "state": "",
+    "pincode": "",
+    "latitude": 12.9407754,
+    "longitude": 77.5982827,
+    "phone": "",
+    "email": "",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "6th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake  Kolkata West Bengal 700091 Tel : 033-2367-0014, 033-2367-0013, 033-2367-0012 Grams : Manaksanstha Email : ero[at]bis[dot]gov[dot]in",
+    "centre_type": "Branch Office",
+    "address": "5 Chowringhee Approach, P. O. Princep Street, Kolkata \u2013 700072 Tel: 033- 22371085 Email : salesero[at]bis[dot]gov[dot]in",
+    "city": "6th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake  Kolkata West Bengal 700091 Tel : 033-2367-0014, 033-2367-0013, 033-2367-0012 Grams : Manaksanstha Email : ero[at]bis[dot]gov[dot]in",
+    "state": "",
+    "pincode": "700072",
+    "latitude": null,
+    "longitude": null,
+    "phone": "700072",
+    "email": "salesero@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. (PBX) 0172-2650206, 2650290 Fax : 0172-2650259 E-mail : nro[at]bis[dot]gov[dot]in",
+    "centre_type": "Branch Office",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. Tel : 0172 2659031 E-mail : salesnro[at]bis[dot]gov[dot]in",
+    "city": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019. (PBX) 0172-2650206, 2650290 Fax : 0172-2650259 E-mail : nro[at]bis[dot]gov[dot]in",
+    "state": "",
+    "pincode": "160019",
+    "latitude": null,
+    "longitude": null,
+    "phone": "160 019",
+    "email": "salesnro@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "C.I.T. Campus, IV Cross Road, Chennai 600 113. Tel : 044-22541442, 22541216, 22542519 Fax : 91-044-22541087 Email : sro[at]bis[dot]gov[dot]in",
+    "centre_type": "Branch Office",
+    "address": "IV Cross Road, Chennai 600 113. Tel :  044-25541442 & 22541216 E-mail :srosales[at]bis[dot]gov[dot]in",
+    "city": "C.I.T. Campus, IV Cross Road, Chennai 600 113. Tel : 044-22541442, 22541216, 22542519 Fax : 91-044-22541087 Email : sro[at]bis[dot]gov[dot]in",
+    "state": "",
+    "pincode": "600113",
+    "latitude": null,
+    "longitude": null,
+    "phone": "600 113",
+    "email": "srosales@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 Tel : 25700030 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
+    "centre_type": "Branch Office",
+    "address": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076 Tel : 25700030 (PRI ) , 25702715 (Other) Grams : Manaksanstha Email :-wro[at]bis[dot]gov[dot]in",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400076",
+    "latitude": 19.054999,
+    "longitude": 72.8692035,
+    "phone": "- 400076",
+    "email": "-wro@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Central Regional Office",
+    "centre_type": "Regional Office",
+    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "city": "Delhi",
+    "state": "Delhi",
+    "pincode": "110002",
+    "latitude": 28.6664535,
+    "longitude": 77.2169781,
+    "phone": "Tel : 011-23237401, 236616",
+    "email": "ddgc@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Eastern Region Office",
+    "centre_type": "Regional Office",
+    "address": "8th Floor, Plot No. 7/7& 7/8, CP Block, Sector V, Salt Lake, Kolkata, West Bengal-700091",
+    "city": "Bengal",
+    "state": "",
+    "pincode": "700091",
+    "latitude": 22.9964948,
+    "longitude": 87.6855882,
+    "phone": "Tel : 033-23670012",
+    "email": "ddge@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Northern Region Office",
+    "centre_type": "Regional Office",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "city": "Northern Region",
+    "state": "",
+    "pincode": "160019",
+    "latitude": 3.3409222,
+    "longitude": 32.6006811,
+    "phone": "Tel : 0172-2659930",
+    "email": "ddgn@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Southern Region Office",
+    "centre_type": "Regional Office",
+    "address": "C.I.T. Campus, IV Cross Road, Chennai 600 113.",
+    "city": "Southern Region",
+    "state": "",
+    "pincode": "600113",
+    "latitude": 35.8948878,
+    "longitude": 14.4735266,
+    "phone": "Tel : 044-22542365",
+    "email": "ddgs@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Western Region Office",
+    "centre_type": "Regional Office",
+    "address": "5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400076",
+    "latitude": 19.054999,
+    "longitude": 72.8692035,
+    "phone": "Tel : 022-25702716, 257027",
+    "email": "ddgw@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Bhopal Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Commercial cum Office Complex Manakalya Opp. Dushera Maidan, E-5 Area Colony Bittan Market, Bhopal 462 016",
+    "city": "Bhopal",
+    "state": "Madhya Pradesh",
+    "pincode": "462016",
+    "latitude": 23.2584857,
+    "longitude": 77.401989,
+    "phone": "Tel : 0755-2423453",
+    "email": "hbpbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Ghaziabad Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Central Laboratory (Chemical Lab Block) Ghaziabad(GZBO) Plot No. 20/9, Site IV, Sahibabad Industrial Area, Sahibabad 201 010",
+    "city": "Ghaziabad",
+    "state": "Uttar Pradesh",
+    "pincode": "201010",
+    "latitude": 28.7749966,
+    "longitude": 77.4586967,
+    "phone": "Tel : 0120-2771092",
+    "email": "hgzbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Faridabad Branch Office",
+    "centre_type": "Branch Office",
+    "address": "SCO 21 Sector 12 Faridabad 121007",
+    "city": "Faridabad",
+    "state": "Haryana",
+    "pincode": "121007",
+    "latitude": 28.4031478,
+    "longitude": 77.3105561,
+    "phone": "Tel : 0129-2292173",
+    "email": "hfrbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Jaipur Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau Of Indian Standards Ground Floor Prithavi Raj Road Opp-Bharat Overseas Bank Limited C-Scheme Jaipur 302 001",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "pincode": "302001",
+    "latitude": 26.9154576,
+    "longitude": 75.8189817,
+    "phone": "Tel : 0141-2223286",
+    "email": "hjpbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Delhi (DLBO-I) Branch Office",
+    "centre_type": "Branch Office",
+    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "city": "Delhi",
+    "state": "Delhi",
+    "pincode": "110002",
+    "latitude": 28.6664535,
+    "longitude": 77.2169781,
+    "phone": "Tel : 011-23237401",
+    "email": "hdlbo1@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Delhi (DLBO-II) Branch Office",
+    "centre_type": "Branch Office",
+    "address": "601/A, Konnectus Tower-1 6th Floor,\u00a0 DMRC Building, Bhavbhuti Marg, New Delhi-110002",
+    "city": "Delhi",
+    "state": "Delhi",
+    "pincode": "110002",
+    "latitude": 28.6664535,
+    "longitude": 77.2169781,
+    "phone": "Tel : 011-23232922",
+    "email": "hdlbo2@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Lucknow Branch Office Regional Telecom Traning Centre, BSNL Building, Sector-G, LDA Colony, Ashiana Lucknow-226012 (U.P.)",
+    "centre_type": "Branch Office",
+    "address": "SUDHEER BISHNOI Scientist-F & Head",
+    "city": "Lucknow  Regional Telecom Traning Centre, BSNL Building, Sector-G, LDA Colony, Ashiana Lucknow-226012 (U.P.)",
+    "state": "",
+    "pincode": "",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 0522-2728808",
+    "email": "hlkbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Noida Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards, NITS Campus, A-20 & 21, Institutional Area Sector-62, Noida-201309",
+    "city": "Noida",
+    "state": "Uttar Pradesh",
+    "pincode": "201309",
+    "latitude": 28.5706333,
+    "longitude": 77.3272147,
+    "phone": "Tel:- 0120-2979004",
+    "email": "hnobo-bis@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Parwanoo Branch Office",
+    "centre_type": "Branch Office",
+    "address": "PARWANOO BRANCH OFFICE, Plot No. 4-A, Sector 27 B Madhya Marg Chandigarh- 160019",
+    "city": "Chandigarh",
+    "state": "Chandigarh",
+    "pincode": "160019",
+    "latitude": 30.7334421,
+    "longitude": 76.7797143,
+    "phone": "Tel : 01792-2650206",
+    "email": "hnlbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Dehradun Branch Office",
+    "centre_type": "Branch Office",
+    "address": "OFFICE, (DHBO) UCF Sadan Ground Floor, Block D Deep Nagar Road, Vishnu Vihar, Dehradun Uttarakhand -248001",
+    "city": "Uttarakhand",
+    "state": "",
+    "pincode": "248001",
+    "latitude": 30.0417376,
+    "longitude": 79.089691,
+    "phone": "Tel : 135- 761 777 7281",
+    "email": "hdhbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Jammu & Kashmir Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Lane No. 4, SIDCO Industrial Complex, Bari Brahmana, Jammu \u2013 181133 (J&K)",
+    "city": "Jammu & Kashmir",
+    "state": "",
+    "pincode": "181133",
+    "latitude": 33.6649297,
+    "longitude": 75.1629584,
+    "phone": "Tel : 01923-222690, 222696",
+    "email": "hjkbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Chandigarh Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Northern Regional Office Plot No. 4-A, Sector 27 B Madhya Marg Chandigarh- 160019",
+    "city": "Chandigarh",
+    "state": "Chandigarh",
+    "pincode": "160019",
+    "latitude": 30.7334421,
+    "longitude": 76.7797143,
+    "phone": "Tel :  0172-2997494",
+    "email": "hchbo1@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Haryana (HRBO) Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "city": "Haryana (HRBO)",
+    "state": "",
+    "pincode": "160019",
+    "latitude": null,
+    "longitude": null,
+    "phone": "2659065",
+    "email": "hhrbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Panipat (PPBO) Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Plot No. 4-A, Sector 27-B, Madhya Marg, Chandigarh \u2013 160 019.",
+    "city": "Panipat (PPBO)",
+    "state": "",
+    "pincode": "160019",
+    "latitude": null,
+    "longitude": null,
+    "phone": "",
+    "email": "ppbo-bis@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Patna Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Patliputra Industrial Estate Patna-800013",
+    "city": "Patna",
+    "state": "",
+    "pincode": "800013",
+    "latitude": 25.6093239,
+    "longitude": 85.1235252,
+    "phone": "Tel :  0612-2275342",
+    "email": "hptbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Bhubaneswar Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards 6th Floor, Gruha Nirman Bhawan (OSHB Building) Sachivalaya Marg Bhubaneswar-751001",
+    "city": "Bhubaneswar",
+    "state": "",
+    "pincode": "751001",
+    "latitude": 20.2602964,
+    "longitude": 85.8394521,
+    "phone": "Tel : 0674-2390847",
+    "email": "hbhbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Guwahati Branch Office",
+    "centre_type": "Branch Office",
+    "address": "2nd Floor, West End Block HOUSEFED Building Complex Last Gate, Dispur Guwahati 781 006",
+    "city": "Guwahati",
+    "state": "",
+    "pincode": "781006",
+    "latitude": 26.1805978,
+    "longitude": 91.753943,
+    "phone": "Tel : 0361-2226508",
+    "email": "hghbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Kolkata Branch Office",
+    "centre_type": "Branch Office",
+    "address": "7th Floor, Plot No 7/7 & 7/8 CP Block, Sector V Salt Lake,Kolkata West Bengal 700091.",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "pincode": "700091",
+    "latitude": 22.5726459,
+    "longitude": 88.3638953,
+    "phone": "Tel : 033-2367-0017,\u00a0033-2",
+    "email": "hkkbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Raipur Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Manakalaya, Plot No. 13-C, Sector-24, Nava Raipur \u2013 Atal Nagar, Chhattisgarh- 492101",
+    "city": "Chhattisgarh",
+    "state": "",
+    "pincode": "492101",
+    "latitude": 21.6637359,
+    "longitude": 81.8406351,
+    "phone": "Tel : 0771-2412236",
+    "email": "hrpbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Jamshedpur Branch Office (JDBO)",
+    "centre_type": "Branch Office",
+    "address": "55 and 57, M Road, Bistupur, Jamshedpur-831001 (Jharkhand)",
+    "city": "Jamshedpur",
+    "state": "",
+    "pincode": "831001",
+    "latitude": 22.8015194,
+    "longitude": 86.2029579,
+    "phone": "Tel : 9891830363",
+    "email": "hjdbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Bengaluru Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Peenya Industrial Area 1st Stage, Bangaluru \u2013 Tumkur Road Bangaluru 560 058",
+    "city": "Bengaluru",
+    "state": "",
+    "pincode": "560058",
+    "latitude": 12.9767936,
+    "longitude": 77.590082,
+    "phone": "Tel: 080-28395604",
+    "email": "hbnbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Hyderabad Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards Plot no 1, Sy no 367/1 Industrial Development Park, Moula ali, Hyderabad -500 040",
+    "city": "Hyderabad",
+    "state": "",
+    "pincode": "500040",
+    "latitude": 17.360589,
+    "longitude": 78.4740613,
+    "phone": "",
+    "email": "hhybo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Coimbatore Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards 5th Floor, Kovai Towers 44 Bala Sundaram Road Coimbatore 641018",
+    "city": "Coimbatore",
+    "state": "",
+    "pincode": "641018",
+    "latitude": 11.0018115,
+    "longitude": 76.9628425,
+    "phone": "Tel :  0422-2248892",
+    "email": "hctbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Kochi Branch Office",
+    "centre_type": "Branch Office",
+    "address": "II Floor Central Ware Housing Corporation Office Complex Maveli Road, Gandhi Nagar Kadavanthara Kochi 682 020 Kerala",
+    "city": "Kochi",
+    "state": "",
+    "pincode": "682020",
+    "latitude": 9.9679032,
+    "longitude": 76.2444378,
+    "phone": "Tel :  0484-2207066",
+    "email": "hkobo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Vijayawada Branch Office",
+    "centre_type": "Branch Office",
+    "address": "First Floor, 56-2-11, AP MARKFED Building, APIIC Colony, Jawahar Auto Nagar, Vijayawada-520007",
+    "city": "Vijayawada",
+    "state": "",
+    "pincode": "520007",
+    "latitude": 16.5115306,
+    "longitude": 80.6160469,
+    "phone": "Tel : 0866-3501605",
+    "email": "hvjbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Chennai Branch Office Branch Office",
+    "centre_type": "Branch Office",
+    "address": "CHENNAI BRANCH OFFICE C.I.T. Campus, IV Cross Road,Taramani, Chennai-600113.",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "pincode": "600113",
+    "latitude": 13.0836939,
+    "longitude": 80.270186,
+    "phone": "Tel : 044-22541220",
+    "email": "cnbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Madurai Branch Office",
+    "centre_type": "Branch Office",
+    "address": "First Floor, SIDCO Centre of Excellence, Women Industrial park, Thoppur, Kappalur Madurai-625008, Tamilnadu.",
+    "city": "Madurai",
+    "state": "",
+    "pincode": "625008",
+    "latitude": 9.9261153,
+    "longitude": 78.1140983,
+    "phone": "Tel : 0452-2910334-22",
+    "email": "hmdbo-bis@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Hubli Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Ist Floor, KSFC building, Hubli-Dharwad Highway, Rayapur, Dharwad, Karnataka \u2013 580009",
+    "city": "Hubli",
+    "state": "",
+    "pincode": "580009",
+    "latitude": 15.3518378,
+    "longitude": 75.1379848,
+    "phone": "2957898",
+    "email": "hubo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Ahmedabad Branch Office-I",
+    "centre_type": "Branch Office",
+    "address": "3rd Floor, Navajivan Amrut Jayanti Bhavan, Behind Gujarat Vidyapith Off. Ashram Road, Ahmedabad 380014 Gujarat (India)",
+    "city": "Ahmedabad -I",
+    "state": "",
+    "pincode": "380014",
+    "latitude": 23.0215374,
+    "longitude": 72.5800568,
+    "phone": "027540314",
+    "email": "hahbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Ahmedabad Branch Office-II",
+    "centre_type": "Branch Office",
+    "address": "3rd Floor, Navajivan Amrut Jayanti Bhavan, Behind Gujarat Vidyapith Off. Ashram Road, Ahmedabad 380014 Gujarat (India)",
+    "city": "Ahmedabad -II",
+    "state": "",
+    "pincode": "380014",
+    "latitude": 23.0215374,
+    "longitude": 72.5800568,
+    "phone": "027540323",
+    "email": "ahbo-2@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Surat Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Surat Branch Office First Floor, Doorsanchar Bhavan Karimabad Admin Building, God Dod Road, Surat- 395001 Shri Vikrant Scientist-E & Head Tel : 0261-2990071, 2991171,2992271 Email: headsubo[at]bis[dot]gov[dot]in",
+    "city": "Surat",
+    "state": "",
+    "pincode": "395001",
+    "latitude": 21.2094892,
+    "longitude": 72.8317058,
+    "phone": "Tel : 0261-2990071, 299117",
+    "email": "headsubo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Pune Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards 657-660, MIDC Building, Market Yard Gultekdi Pune 411 037",
+    "city": "Pune",
+    "state": "",
+    "pincode": "411037",
+    "latitude": 18.5213738,
+    "longitude": 73.8545071,
+    "phone": "Tel : 020-24264911",
+    "email": "hpnbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Rajkot Branch Office-I",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards F P No. 364/P, Ward no. 13, Opposite Crystal Mall, Next to Bharat Petrol Pump, Kalawad Road, Rajkot- 360005",
+    "city": "Rajkot",
+    "state": "",
+    "pincode": "360005",
+    "latitude": 22.3053263,
+    "longitude": 70.8028377,
+    "phone": "Tel : 0281- 2563978",
+    "email": "hrjbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "GANDHIDHAM BRANCH OFFICE (GDBO)",
+    "centre_type": "Branch Office",
+    "address": "F P No. 364/P, Ward no. 13, Opposite Crystal Mall, Next to Bharat Petrol Pump, Kalawad Road, Rajkot- 360005",
+    "city": "Rajkot",
+    "state": "",
+    "pincode": "360005",
+    "latitude": 22.3053263,
+    "longitude": 70.8028377,
+    "phone": "Tel : 0281-2563978",
+    "email": "rjbo-2@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Nagpur Branch Office",
+    "centre_type": "Branch Office",
+    "address": "Bureau of Indian Standards Nagpur Branch Office Indian Bureau of Mines, Block \u2018A\u2019 & \u2018D\u2019,8th Floor, Indira Bhavan, Civil Lines, Nagpur-440001, Maharashtra",
+    "city": "Nagpur",
+    "state": "",
+    "pincode": "440001",
+    "latitude": 21.1498134,
+    "longitude": 79.0820556,
+    "phone": "Tel : 0712-2540807",
+    "email": "hngbo@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Mumbai (MUBO) Branch Office",
+    "centre_type": "Branch Office",
+    "address": "MUBO-I, 5th Floor/ MTNL CETTM Technology Street, Hiranandani Gardens, Powai , Mumbai- 400076.",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400076",
+    "latitude": 19.054999,
+    "longitude": 72.8692035,
+    "phone": "Tel : 022-25702721",
+    "email": "hmubo1@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Central Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Administrative Office: Plot No. 20/9, Site IV, Sahibabad Industrial Area, Sahibabad 201 010",
+    "city": "Central Laboratory",
+    "state": "",
+    "pincode": "201010",
+    "latitude": 9.8015932,
+    "longitude": 76.3535687,
+    "phone": "Tel : 0120-2771091-92 0120",
+    "email": "cl@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Eastern Regional Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Main Building : 1/14, VIP Rd, CIT Scheme VII M, BRS 10, Kankurgachi, Kolkata, West Bengal 700054, Annex Building : P-230,VIP Rd, CIT Scheme VII M, Block W, Kankurgachi, Kolkata, West Bengal 700054.",
+    "city": "Eastern Regional Laboratory",
+    "state": "",
+    "pincode": "700054",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 033 23209474",
+    "email": "erol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Northern Regional Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "B-69, Phase VII, SAS Nagar Industrial Focal Point, Mohali-160051",
+    "city": "Mohali",
+    "state": "",
+    "pincode": "160051",
+    "latitude": 30.6908804,
+    "longitude": 76.7114879,
+    "phone": "Tel : 0172-4671027, 26 983",
+    "email": "nrol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Western Regional Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Manakalaya Bureau of Indian Standards E-9, M.I.D.C., Behind Marol Telephone Exchange. Andheri (East), Mumbai 400 093",
+    "city": "Western Regional Laboratory",
+    "state": "",
+    "pincode": "400093",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 022-28327856, 283648",
+    "email": "wrol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Southern Regional Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "C.I.T Campus, IV Cross Road Chennai-600 113",
+    "city": "Southern Regional Laboratory",
+    "state": "",
+    "pincode": "600113",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 044-22541208, 225410",
+    "email": "srol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Bangalore Branch Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Peenya Industiral Area, Ist Stage, Bangalore-Tumkur Road, Bangalore-560 058",
+    "city": "Bangalore Branch Laboratory",
+    "state": "",
+    "pincode": "560058",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 080-23721442",
+    "email": "bnbol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Patna Branch Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Pataliputra Industrial Estate, Patna-800 013",
+    "city": "Patna Branch Laboratory",
+    "state": "",
+    "pincode": "800013",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 0612-2262808",
+    "email": "pbol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Guwahati Branch Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "2nd Floor,West End Block, HOUSEFED Building Complex Beltola Dispur, Guwahati-781006",
+    "city": "Guwahati",
+    "state": "",
+    "pincode": "781006",
+    "latitude": 26.1805978,
+    "longitude": 91.753943,
+    "phone": "Tel : 0361-2525937",
+    "email": "gbol@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Hyderabad Branch Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Plot, Sy no 367/1, Industrial, Development Park Hyderabad Branch, Street Number 1, Moula Ali, Hyderabad, 500040",
+    "city": "Hyderabad Branch Laboratory",
+    "state": "",
+    "pincode": "500040",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 9154843232, 91548432",
+    "email": "hybl@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  },
+  {
+    "name": "Jammu Kashmir Branch Laboratory",
+    "centre_type": "Testing Laboratory",
+    "address": "Lane No.4, SIDCO Industrial Complex, Bari Brahmana, Jammu \u2013 181133 (J&K)",
+    "city": "Jammu Kashmir Branch Laboratory",
+    "state": "",
+    "pincode": "181133",
+    "latitude": null,
+    "longitude": null,
+    "phone": "Tel : 01923-222690, 222696",
+    "email": "jk-ral@bis.gov.in",
+    "services": [
+      "Standards Information",
+      "Certification Services",
+      "Public Grievances"
+    ]
+  }
+]
