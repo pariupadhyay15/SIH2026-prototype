@@ -197,17 +197,18 @@ def ask_question(user_question: str, chat_history_list=None):
   if chat_history_list is None:
     chat_history_list = []
 
-
+  # 1. Instant check for greetings & farewells
   is_shortcut, shortcut_response = is_simple_greeting(user_question)
   if is_shortcut:
     return shortcut_response, []
 
   try:
-    # Proceed with search and prompt generation for regular queries...
+    # 2. Fetch web context & chat history
     results, search_query = get_web_results(user_question)
     web_context = format_web_context(results)
     formatted_history = format_chat_history(chat_history_list)
 
+    # 3. Generate response
     final_prompt = prompt.invoke({
         "chat_history": formatted_history,
         "context": web_context,
@@ -221,12 +222,26 @@ def ask_question(user_question: str, chat_history_list=None):
         else str(response).strip()
     )
 
-    sources = [r.get("url") for r in results if r.get("url")]
-    return answer, list(set(sources))
+    # 4. Filter sources out for Out-of-Scope responses
+    boundary_triggers = [
+        "Main 'BIS Sahayak' hoon",
+        "expertise is focused on",
+        "विशेषज्ञता भारतीय मानक ब्यूरो",
+        "limited hai",
+    ]
+
+    is_out_of_scope = any(trigger in answer for trigger in boundary_triggers)
+
+    if is_out_of_scope:
+      sources = []
+    else:
+      sources = list(set([r.get("url") for r in results if r.get("url")]))
+
+    return answer, sources
 
   except Exception as e:
     print(f"Error executing ask_question: {e}")
     return (
-        "I experienced a temporary network issue fetching details. Please try"
+        "I experienced a temporary issue processing your request. Please try"
         " asking your question again!"
     ), []
