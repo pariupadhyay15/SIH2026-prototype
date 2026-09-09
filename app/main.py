@@ -46,8 +46,18 @@ def home():
 
 @app.post("/chat")
 def chat_endpoint(request: ChatRequest):
-  answer, sources = ask_question(request.question, request.chat_history)
-  return {"answer": answer, "sources": sources}
+  try:
+    answer, sources = ask_question(request.question, request.chat_history)
+    return {"answer": answer, "sources": sources}
+  except Exception as e:
+    print(f"Error in chat endpoint: {e}")
+    return {
+        "answer": (
+            "I encountered a temporary issue retrieving the detailed standard"
+            " parameters. Please try asking again in a moment."
+        ),
+        "sources": [],
+    }
 
 
 
