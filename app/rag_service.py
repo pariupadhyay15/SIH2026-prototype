@@ -1,5 +1,4 @@
 import os
-import re
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from tavily import TavilyClient
@@ -17,7 +16,7 @@ tavily_client = TavilyClient(api_key=tavily_api_key)
 
 def get_web_results(user_question: str, max_results: int = 5):
   """Constructs targeted search queries to retrieve active, official BIS standards, QCOs, amendments, and detailed technical parameters."""
-
+  
   detail_keywords = ""
   lowered = user_question.lower()
   if any(
@@ -91,6 +90,10 @@ def format_web_context(results: list) -> str:
 
 
 def format_chat_history(chat_history_list: list) -> str:
+  """Converts Pydantic objects or dicts from chat_history into a clean string block.
+
+  Takes the last 4 messages to preserve context without bloating the prompt.
+  """
   if not chat_history_list:
     return "No prior conversation history."
 
@@ -108,7 +111,7 @@ def format_chat_history(chat_history_list: list) -> str:
   return "\n".join(formatted[-4:])
 
 
-# --- DYNAMIC PROMPT TEMPLATE ---
+
 prompt = PromptTemplate(
     template="""
 You are "BIS Sahayak", an authentic, direct, and helpful AI consultant for the Bureau of Indian Standards (BIS).
@@ -116,17 +119,15 @@ Your primary focus is guiding users on Indian Standards (IS codes), ISI mark, CR
 
 CRITICAL DIALOGUE RULES:
 
-1. STRICT LANGUAGE MATCHING RULE (MOST IMPORTANT):
-   Detect the language/script of the USER QUESTION and respond STRICTLY in the exact same language/script:
-   - If User wrote in ENGLISH -> Respond ONLY in pure ENGLISH.
-   - If User wrote in HINGLISH/ROMAN HINDI -> Respond ONLY in HINGLISH.
-   - If User wrote in DEVANAGARI HINDI -> Respond ONLY in DEVANAGARI HINDI.
+1. STRICT DOMAIN & LANGUAGE EVALUATION:
+   - VALID DOMAIN QUERIES: Questions about any physical product, manufacturing, quality standards, certification processes, testing, lab audits, or QCOs are VALID. Provide the factual answer directly in the user's language.
+   - COMPLETELY UNRELATED QUERIES: Questions about personal life, unrelated hobbies, sports, entertainment, or non-industrial topics are OUT-OF-SCOPE.
+     -> Respond with a polite boundary message STRICTLY MATCHING the user's language/script:
+        - If User wrote in English: "I am 'BIS Sahayak', and my expertise is focused on Bureau of Indian Standards (BIS), IS codes, and product compliance. Please feel free to ask any question related to BIS certification or Indian Standards!"
+        - If User wrote in Hinglish/Roman Hindi: "Main 'BIS Sahayak' hoon, aur meri expertise Bureau of Indian Standards (BIS), IS codes, aur product compliance tak limited hai. Kripya BIS certification ya Indian Standards se sambandhit koi sawaal poochein!"
+        - If User wrote in Devanagari Hindi: "मैं 'बीआईएस सहायक' हूँ, और मेरी विशेषज्ञता भारतीय मानक ब्यूरो (BIS), IS कोड और उत्पाद अनुपालन तक ही सीमित है। कृपया BIS प्रमाणन या भारतीय मानकों से संबंधित कोई भी प्रश्न पूछें!"
 
-2. STRICT DOMAIN EVALUATION:
-   - GREETINGS & INTRODUCTIONS: If the user greets or introduces themselves (e.g., "Hi", "I am Pari"), greet them warmly and ask how you can help with BIS certification today. Do NOT treat introductions as out-of-scope.
-   - VALID DOMAIN QUERIES: Questions about physical products, manufacturing, quality standards, certification processes, testing, lab audits, or QCOs are VALID. Answer directly and factually.
-   - COMPLETELY UNRELATED QUERIES: Questions about personal life (e.g., "what happened with me today"), unrelated hobbies, sports, or non-industrial topics are OUT-OF-SCOPE.
-     -> State politely in the USER'S LANGUAGE that you are "BIS Sahayak", an AI assistant specialized strictly in Bureau of Indian Standards (BIS) certification, IS codes, and compliance, and ask them to submit a query related to Indian Standards.
+2. FAREWELLS & CLOSINGS: If the user is saying goodbye or thanking you, reply with a warm, professional closing phrase matching their language.
 
 3. DYNAMIC OPENINGS (NO FIXED PREFIXES): For valid domain queries, NEVER start responses with fixed phrases like "Don't worry", "That's a great product", "According to...", or "I am BIS Sahayak". Jump directly into the factual answer.
 
@@ -134,7 +135,7 @@ CRITICAL DIALOGUE RULES:
    - For general queries: Provide a concise 2-sentence direct answer.
    - For explicit detail requests ("Tell me in detail", "What are the exact testing parameters?"): List exact material grades, dimensions, and numeric parameters found in WEB EVIDENCE.
 
-5. GUIDING FOLLOW-UP QUESTION: For valid technical queries, end with a single, relevant follow-up question. For out-of-scope queries, DO NOT ask technical follow-up questions.
+5. GUIDING FOLLOW-UP QUESTION: For valid technical queries, end with a single, relevant follow-up question. For out-of-scope or farewell queries, DO NOT ask technical follow-up questions.
 
 PREVIOUS CHAT HISTORY:
 {chat_history}
@@ -154,43 +155,35 @@ ANSWER:
 def is_simple_greeting(question: str):
   q = question.strip().lower()
 
-  greeting_patterns = [
-      r"^(hi|hello|hey|namaste|good morning|good evening)\b"
+  greetings = [
+      "hi",
+      "hello",
+      "hey",
+      "namaste",
+      "good morning",
+      "good evening",
+      "haa",
+      "haan",
   ]
-  farewell_patterns = [
-      r"^(bye|goodbye|bye bye|thank you|thanks|thanku|ok bye|shukriya)\b"
+  farewells = [
+      "bye",
+      "goodbye",
+      "bye bye",
+      "thank you",
+      "thanks",
+      "thanku",
+      "ok bye",
+      "shukriya",
   ]
 
-  # Smart match for greetings/introductions like "hi", "hi i am pari", "hello my name is rahul"
-  if (
-      any(re.search(pat, q) for pat in greeting_patterns)
-      and len(q) < 35
-      and not any(
-          k in q
-          for k in [
-              "standard",
-              "is",
-              "code",
-              "bis",
-              "certificate",
-              "license",
-              "test",
-          ]
-      )
-  ):
-
-    name_match = re.search(
-        r"(?:i am|i'm|my name is|main)\s+([a-zA-Z]+)", q, re.IGNORECASE
-    )
-    user_name = f" {name_match.group(1).capitalize()}" if name_match else ""
-
+  if q in greetings:
     return True, (
-        f"Namaste{user_name}! I'm your BIS Sahayak assistant. What product or"
+        "Namaste! I'm your BIS Sahayak assistant. What product or"
         " certification are you working on today? I'd love to help you get"
         " started!"
     )
 
-  if any(re.search(pat, q) for pat in farewell_patterns) and len(q) < 25:
+  if q in farewells:
     return True, (
         "Thank you for consulting BIS Sahayak! Feel free to return whenever you"
         " need assistance with Indian Standards or certification. Have a great"
@@ -204,16 +197,18 @@ def ask_question(user_question: str, chat_history_list=None):
   if chat_history_list is None:
     chat_history_list = []
 
-  # Instant check for greetings & farewells
+  # 1. Instant check for greetings & farewells
   is_shortcut, shortcut_response = is_simple_greeting(user_question)
   if is_shortcut:
     return shortcut_response, []
 
   try:
+    # 2. Fetch web context & chat history
     results, search_query = get_web_results(user_question)
     web_context = format_web_context(results)
     formatted_history = format_chat_history(chat_history_list)
 
+    # 3. Generate response
     final_prompt = prompt.invoke({
         "chat_history": formatted_history,
         "context": web_context,
@@ -227,22 +222,20 @@ def ask_question(user_question: str, chat_history_list=None):
         else str(response).strip()
     )
 
-    # Detect out-of-scope keywords across English, Hinglish, and Hindi to hide sources
-    out_of_scope_indicators = [
-        "limited",
-        "specialized",
-        "expertise is focused",
-        "tak limited",
-        "se sambandhit",
-        "तक ही सीमित",
-        "विशेषज्ञता",
+    # 4. Filter sources out for Out-of-Scope responses
+    boundary_triggers = [
+        "Main 'BIS Sahayak' hoon",
+        "expertise is focused on",
+        "विशेषज्ञता भारतीय मानक ब्यूरो",
+        "limited hai",
     ]
 
-    if any(ind in answer.lower() for ind in out_of_scope_indicators):
+    is_out_of_scope = any(trigger in answer for trigger in boundary_triggers)
+
+    if is_out_of_scope:
       sources = []
     else:
-      sources = [r.get("url") for r in results if r.get("url")]
-      sources = list(set(sources))
+      sources = list(set([r.get("url") for r in results if r.get("url")]))
 
     return answer, sources
 
