@@ -112,7 +112,6 @@ def format_chat_history(chat_history_list: list) -> str:
 
 
 
-# --- DYNAMIC & ADAPTIVE CONVERSATIONAL PROMPT TEMPLATE ---
 prompt = PromptTemplate(
     template="""
 You are "BIS Sahayak", an authentic, direct, and helpful AI consultant for the Bureau of Indian Standards (BIS).
@@ -120,24 +119,23 @@ Your primary focus is guiding users on Indian Standards (IS codes), ISI mark, CR
 
 CRITICAL DIALOGUE RULES:
 
-1. STRICT DOMAIN EVALUATION (IMPORTANT):
-   - VALID DOMAIN QUERIES: Questions about any physical product (e.g., plugs, sockets, helmets, water, steel), manufacturing, quality standards, certification processes, testing, lab audits, or QCOs are VALID.
-     -> DO NOT output any boundary/disclaimer warning for valid domain queries. Give the technical answer directly!
-   - COMPLETELY UNRELATED QUERIES: Questions about personal life (e.g., "aaj maine kya khaya"), unrelated hobbies, sports, entertainment, or completely non-industrial topics are OUT-OF-SCOPE.
-     -> ONLY for completely unrelated queries, respond politely: 
-        "Main 'BIS Sahayak' hoon, aur meri expertise Bureau of Indian Standards (BIS), IS codes, aur product compliance tak limited hai. Kripya BIS certification ya Indian Standards se sambandhit koi sawaal poochein!"
+1. STRICT DOMAIN & LANGUAGE EVALUATION:
+   - VALID DOMAIN QUERIES: Questions about any physical product, manufacturing, quality standards, certification processes, testing, lab audits, or QCOs are VALID. Provide the factual answer directly in the user's language.
+   - COMPLETELY UNRELATED QUERIES: Questions about personal life, unrelated hobbies, sports, entertainment, or non-industrial topics are OUT-OF-SCOPE.
+     -> Respond with a polite boundary message STRICTLY MATCHING the user's language/script:
+        - If User wrote in English: "I am 'BIS Sahayak', and my expertise is focused on Bureau of Indian Standards (BIS), IS codes, and product compliance. Please feel free to ask any question related to BIS certification or Indian Standards!"
+        - If User wrote in Hinglish/Roman Hindi: "Main 'BIS Sahayak' hoon, aur meri expertise Bureau of Indian Standards (BIS), IS codes, aur product compliance tak limited hai. Kripya BIS certification ya Indian Standards se sambandhit koi sawaal poochein!"
+        - If User wrote in Devanagari Hindi: "मैं 'बीआईएस सहायक' हूँ, और मेरी विशेषज्ञता भारतीय मानक ब्यूरो (BIS), IS कोड और उत्पाद अनुपालन तक ही सीमित है। कृपया BIS प्रमाणन या भारतीय मानकों से संबंधित कोई भी प्रश्न पूछें!"
 
-2. DYNAMIC OPENINGS (NO FIXED PREFIXES): For valid domain queries, NEVER start responses with fixed phrases like "Don't worry", "That's a great product", "According to...", or "I am BIS Sahayak". Jump directly into the factual answer.
+2. FAREWELLS & CLOSINGS: If the user is saying goodbye or thanking you, reply with a warm, professional closing phrase matching their language.
 
-3. ADAPTIVE DETAIL LEVEL:
-   - For general queries ("What is the standard for plug and socket?"): Provide a concise 2-sentence direct answer.
-   - For explicit detail requests ("Tell me in detail", "What are the exact testing parameters?"): List exact material grades, dimensions, and numeric parameters found in the WEB EVIDENCE.
+3. DYNAMIC OPENINGS (NO FIXED PREFIXES): For valid domain queries, NEVER start responses with fixed phrases like "Don't worry", "That's a great product", "According to...", or "I am BIS Sahayak". Jump directly into the factual answer.
 
-4. TONE & REPETITION GUARD:
-   - Match the user's language (English -> English, Devanagari Hindi -> Devanagari Hindi, Hinglish -> Hinglish).
-   - When using Hinglish, use clean everyday conversational sentences. NEVER repeat or loop technical phrases.
+4. ADAPTIVE DETAIL LEVEL:
+   - For general queries: Provide a concise 2-sentence direct answer.
+   - For explicit detail requests ("Tell me in detail", "What are the exact testing parameters?"): List exact material grades, dimensions, and numeric parameters found in WEB EVIDENCE.
 
-5. GUIDING FOLLOW-UP QUESTION: For valid queries, end with a single, relevant follow-up question (e.g., asking about current production scale, location, or specific product variant).
+5. GUIDING FOLLOW-UP QUESTION: For valid technical queries, end with a single, relevant follow-up question. For out-of-scope or farewell queries, DO NOT ask technical follow-up questions.
 
 PREVIOUS CHAT HISTORY:
 {chat_history}
@@ -154,7 +152,9 @@ ANSWER:
 )
 
 
-def is_simple_greeting(question: str) -> bool:
+def is_simple_greeting(question: str):
+  q = question.strip().lower()
+
   greetings = [
       "hi",
       "hello",
@@ -165,42 +165,68 @@ def is_simple_greeting(question: str) -> bool:
       "haa",
       "haan",
   ]
-  return question.strip().lower() in greetings
+  farewells = [
+      "bye",
+      "goodbye",
+      "bye bye",
+      "thank you",
+      "thanks",
+      "thanku",
+      "ok bye",
+      "shukriya",
+  ]
+
+  if q in greetings:
+    return True, (
+        "Namaste! I'm your BIS Sahayak assistant. What product or"
+        " certification are you working on today? I'd love to help you get"
+        " started!"
+    )
+
+  if q in farewells:
+    return True, (
+        "Thank you for consulting BIS Sahayak! Feel free to return whenever you"
+        " need assistance with Indian Standards or certification. Have a great"
+        " day!"
+    )
+
+  return False, None
 
 
 def ask_question(user_question: str, chat_history_list=None):
   if chat_history_list is None:
     chat_history_list = []
 
-  if is_simple_greeting(user_question):
-    greeting_reply = (
-        "Namaste! I'm your BIS Sahayak assistant. What product or"
-        " certification are you working on today? I'd love to help you get"
-        " started!"
+
+  is_shortcut, shortcut_response = is_simple_greeting(user_question)
+  if is_shortcut:
+    return shortcut_response, []
+
+  try:
+    # Proceed with search and prompt generation for regular queries...
+    results, search_query = get_web_results(user_question)
+    web_context = format_web_context(results)
+    formatted_history = format_chat_history(chat_history_list)
+
+    final_prompt = prompt.invoke({
+        "chat_history": formatted_history,
+        "context": web_context,
+        "question": user_question,
+    })
+
+    response = llm.invoke(final_prompt)
+    answer = (
+        response.content.strip()
+        if hasattr(response, "content")
+        else str(response).strip()
     )
-    return greeting_reply, []
 
-  results, search_query = get_web_results(user_question)
-  web_context = format_web_context(results)
-  formatted_history = format_chat_history(chat_history_list)
+    sources = [r.get("url") for r in results if r.get("url")]
+    return answer, list(set(sources))
 
-  final_prompt = prompt.invoke({
-      "chat_history": formatted_history,
-      "context": web_context,
-      "question": user_question,
-  })
-
-  response = llm.invoke(final_prompt)
-  answer = (
-      response.content.strip()
-      if hasattr(response, "content")
-      else str(response).strip()
-  )
-
-  sources = []
-  for result in results:
-    url = result.get("url")
-    if url and url not in sources:
-      sources.append(url)
-
-  return answer, sources
+  except Exception as e:
+    print(f"Error executing ask_question: {e}")
+    return (
+        "I experienced a temporary network issue fetching details. Please try"
+        " asking your question again!"
+    ), []
