@@ -35,26 +35,44 @@ tavily_client = TavilyClient(api_key=tavily_api_key)
 
 
 
+STRONG_HINGLISH_MARKERS = [
+    "nahi", "nahin", "nhi", "kya", "hai", "hain", "kar", "karo", "karna",
+    "kro", "raha", "rahi", "rha", "rhi", "liye", "mera", "meri", "apna",
+    "apne", "hoga", "hogi", "chahiye", "matlab", "batao", "kaise", "kyun",
+    "kyu", "kaun", "kahan", "kab", "yeh", "wo", "voh", "usse", "iske",
+    "iska", "uska", "sakta", "sakti", "sakte", "bech", "banaya", "khareed",
+    "khareeda", "dukaan", "wala", "wale", "hoon", "tha", "thi",
+    "mujhe", "aapko", "humein", "unhe", "kuch", "sab", "bhi", "toh",
+]
+
+WEAK_HINGLISH_MARKERS = ["ye", "sahi", "galat", "se", "ko", "ka", "ki", "ke"]
+
+
 def detect_language(text: str) -> str:
   """Returns 'devanagari', 'hinglish', or 'english' based on the user's own text."""
   if re.search(r"[\u0900-\u097F]", text):
     return "devanagari"
 
-  hinglish_words = [
-      "kya", "hai", "kaise", "kyun", "nahi", "nahin", "mujhe", "matlab",
-      "aapko", "chahiye", "batao", "karna", "karo", "hoga", "kar", "mera",
-      "meri", "iske", "iska", "yeh", "ye", "sahi", "galat",
-  ]
   lowered = text.lower()
-  hits = sum(1 for w in hinglish_words if re.search(rf"\b{w}\b", lowered))
-  if hits >= 2:
+
+  strong_hits = sum(
+      1 for w in STRONG_HINGLISH_MARKERS if re.search(rf"\b{w}\b", lowered)
+  )
+  if strong_hits >= 1:
+    return "hinglish"
+
+  weak_hits = sum(
+      1 for w in WEAK_HINGLISH_MARKERS if re.search(rf"\b{w}\b", lowered)
+  )
+  if weak_hits >= 2:
     return "hinglish"
 
   return "english"
 
 
+
 SCENARIO_KEYWORDS = [
-   
+    
     "no record found", "fake", "fraud", "cheated", "scam", "duplicate",
     "not working", "denied", "rejected", "complaint", "problem", "issue",
     "missing", "lost", "damaged", "refused", "wrong", "expired", "invalid",
@@ -224,7 +242,7 @@ def format_chat_history(chat_history_list: list) -> str:
     role_label = "User" if str(role).lower() == "user" else "Assistant"
     formatted.append(f"{role_label}: {content}")
 
-  return "\n".join(formatted[-8:])  # last 4 exchanges (user+assistant pairs)
+  return "\n".join(formatted[-8:])  
 
 
 
@@ -375,7 +393,7 @@ def clean_repetition(answer: str, user_question: str) -> str:
   kept = []
   for sentence in sentences:
     if list_item_pattern.match(sentence):
-      kept.append(sentence)  
+      kept.append(sentence)  # numbered/bulleted steps are never deduped
       continue
     is_dupe = any(
         difflib.SequenceMatcher(None, sentence.lower(), prior.lower()).ratio()
