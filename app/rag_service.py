@@ -53,9 +53,8 @@ def detect_language(text: str) -> str:
   return "english"
 
 
-
 SCENARIO_KEYWORDS = [
-    
+   
     "no record found", "fake", "fraud", "cheated", "scam", "duplicate",
     "not working", "denied", "rejected", "complaint", "problem", "issue",
     "missing", "lost", "damaged", "refused", "wrong", "expired", "invalid",
@@ -180,7 +179,7 @@ def get_web_results(
     if not (title and url and content):
       continue
 
-    
+
     domain = urlparse(url).netloc.lower().lstrip("www.")
     if not any(domain == d or domain.endswith("." + d) for d in TRUSTED_DOMAINS):
       continue
@@ -272,6 +271,14 @@ You are "BIS Sahayak", a warm, direct, and knowledgeable human consultant for th
    - BUT: if the number IS present in the WEB EVIDENCE, state it as a confident, final fact. Do NOT hedge a sourced answer with "please verify on the BIS website," "check the latest version yourself," "contact BIS directly," or similar — you ARE the tool the user is using instead of digging through the BIS site themselves; redirecting them back to it defeats the purpose. You may add ONE brief factual note if genuinely useful (e.g. the standard's year, or that a specific part/scope applies), but never as a suggestion for the user to go re-check what you just told them.
    - Do not tack on a generic follow-up question to a plain factual answer that doesn't need one ("would you like to confirm this further?"). Only ask a follow-up when it's the rule-3 scenario format, or when something genuinely still needs to be decided (e.g. which of two variants applies to their case).
 
+8. LEGALITY / COMPLIANCE QUESTIONS ("can I sell/manufacture without following the standard?", "is it legal to skip certification?"):
+   - These need a direct Yes/No answer as the FIRST sentence, not a description of the requirement instead of an answer. If the product falls under a mandatory BIS Quality Control Order (QCO), state clearly and plainly that selling or manufacturing it without ISI/BIS certification is not legal — don't soften this into only "you should get certified."
+   - Only after that direct answer, explain the "why" (mandatory QCO, penalties if known from evidence) and then the steps to become compliant.
+
+9. AMBIGUOUS PRODUCT TERMS:
+   - Some everyday words (e.g. "helmet", "cylinder", "bottle") map to MORE THAN ONE distinct IS standard depending on sub-type (e.g. two-wheeler rider helmets vs industrial safety helmets — different IS numbers, different QCOs). Silently picking one and answering as if it's the only one is misleading.
+   - When the question doesn't specify which sub-type, either: (a) name the 2-3 likely sub-types and their respective standards briefly, or (b) answer for the most common everyday meaning but explicitly flag that a different sub-type has a different standard. Never present one standard as definitive for an ambiguous generic term without this caveat.
+
 EXAMPLES OF THE RIGHT SHAPE FOR A SCENARIO ANSWER (do not copy the content, only the shape — no echoed question, no repeated sentences, no dead-end filler):
 
 Example (English): "That result usually means one of two things: the code was mistyped, or the mark itself was never registered — it doesn't automatically mean fraud. Steps: 1) Re-check the digits on the bill against the digits on the jewellery itself. 2) Retry verification on the BIS Care app after confirming the digits. 3) If it still fails, ask the jeweller for the Assaying and Hallmarking Centre's registration proof. 4) If they can't produce it, file a complaint through the BIS Care app or the BIS helpline. Do you want the direct steps for filing that complaint?"
@@ -336,7 +343,7 @@ def is_simple_greeting(question: str):
 
 
 def _split_sentences(text: str) -> list:
-  
+
   parts = re.split(r"(?<=[.!?।])\s+", text.strip())
   return [p for p in parts if p.strip()]
 
@@ -344,24 +351,37 @@ def _split_sentences(text: str) -> list:
 def clean_repetition(answer: str, user_question: str) -> str:
   """Code-level safety net: strips an echoed opening question and drops any
   sentence that's a near-duplicate of one already said. Independent of
-  whether the LLM actually follows the no-repetition prompt rule."""
+  whether the LLM actually follows the no-repetition prompt rule.
+
+  IMPORTANT: numbered list items (e.g. "1) ...", "2) ...") are exempt from
+  the duplicate check. Ordered steps deliberately reuse similar phrasing
+  templates ("Agar X, toh aapko Y karein") while covering different content,
+  so similarity-based dedup was wrongly deleting genuine steps and leaving
+  gaps like "1) ... 3) ... 4) ..." with step 2 silently missing."""
   sentences = _split_sentences(answer)
   if not sentences:
     return answer
 
-  
-  first_vs_question = difflib.SequenceMatcher(
-      None, sentences[0].lower(), user_question.lower()
-  ).ratio()
-  if first_vs_question > 0.6:
-    sentences = sentences[1:]
+  list_item_pattern = re.compile(r"^\s*(\d+[\).]|[-*•])\s")
+
+
+  if not list_item_pattern.match(sentences[0]):
+    first_vs_question = difflib.SequenceMatcher(
+        None, sentences[0].lower(), user_question.lower()
+    ).ratio()
+    if first_vs_question > 0.6:
+      sentences = sentences[1:]
 
   kept = []
   for sentence in sentences:
+    if list_item_pattern.match(sentence):
+      kept.append(sentence)  
+      continue
     is_dupe = any(
         difflib.SequenceMatcher(None, sentence.lower(), prior.lower()).ratio()
         > 0.75
         for prior in kept
+        if not list_item_pattern.match(prior)
     )
     if not is_dupe:
       kept.append(sentence)
