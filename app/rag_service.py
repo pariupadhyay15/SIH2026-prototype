@@ -8,7 +8,14 @@ from tavily import TavilyClient
 
 from app.config import llm
 
-
+# Trusted domains — enforced in CODE, not just requested from the search API,
+# since the search provider does not always honor include_domains strictly.
+# Added consumer-grievance and quality-accreditation bodies (verified) so
+# complaint/scenario answers can cite real official redressal channels too.
+# NOTE: corpbiz.io and alephindia.in were removed — they are private paid
+# certification-consultancy companies, not government/BIS sources. Mixing
+# their content into hallmarking/certification answers was diluting answer
+# quality and credibility for exactly those two query types.
 TRUSTED_DOMAINS = {
     "bis.gov.in",
     "standards.bis.gov.in",
@@ -16,13 +23,11 @@ TRUSTED_DOMAINS = {
     "crsbis.in",
     "pib.gov.in",
     "egazette.gov.in",
-    "corpbiz.io",
-    "alephindia.in",
-    "consumeraffairs.gov.in",   
-    "consumeraffairs.nic.in",   
-    "ncdrc.nic.in",             
-    "qcin.org",                 
-    "india.gov.in",             
+    "consumeraffairs.gov.in",   # Dept. of Consumer Affairs (current official domain)
+    "consumeraffairs.nic.in",   # same department, older domain, still live
+    "ncdrc.nic.in",             # National Consumer Disputes Redressal Commission
+    "qcin.org",                 # Quality Council of India (accreditation body)
+    "india.gov.in",             # National Portal of India
 }
 
 load_dotenv()
@@ -34,7 +39,10 @@ if not tavily_api_key:
 tavily_client = TavilyClient(api_key=tavily_api_key)
 
 
-
+# --- LANGUAGE DETECTION (rule-based, not left to the LLM alone) ---
+# STRONG markers are Hindi/Hinglish function words and common verb forms that
+# almost never appear in genuine English sentences — a single hit is enough.
+# WEAK markers are more ambiguous, so we still require 2+ of those alone.
 STRONG_HINGLISH_MARKERS = [
     "nahi", "nahin", "nhi", "kya", "hai", "hain", "kar", "karo", "karna",
     "kro", "raha", "rahi", "rha", "rhi", "liye", "mera", "meri", "apna",
@@ -45,6 +53,7 @@ STRONG_HINGLISH_MARKERS = [
     "mujhe", "aapko", "humein", "unhe", "kuch", "sab", "bhi", "toh",
 ]
 
+# Weaker, more ambiguous overlap words — need 2+ together to count.
 WEAK_HINGLISH_MARKERS = ["ye", "sahi", "galat", "se", "ko", "ka", "ki", "ke"]
 
 
@@ -70,19 +79,23 @@ def detect_language(text: str) -> str:
   return "english"
 
 
-
+# --- SCENARIO DETECTION (complaints, fraud, real-life situations) ---
+# Includes English, Hinglish, and Devanagari phrasings — a purely English
+# keyword list misses most real Hinglish complaints (e.g. "kaam nahi kar
+# raha", "nakli", "toot gaya"), which was causing the model to ramble
+# instead of using the structured step-by-step format.
 SCENARIO_KEYWORDS = [
-    
+    # English
     "no record found", "fake", "fraud", "cheated", "scam", "duplicate",
     "not working", "denied", "rejected", "complaint", "problem", "issue",
     "missing", "lost", "damaged", "refused", "wrong", "expired", "invalid",
     "doesn't match", "not matching", "mismatch", "broke", "broken", "crack",
     "cracked", "return", "refund", "leak", "leaking",
-    
+    # Hinglish
     "nakli", "asli", "shikayat", "galat", "kharab", "toot", "tut gaya",
     "kaam nahi", "chal nahi raha", "dhoka", "jhooth", "fatt gaya",
     "khareeda", "wapas", "paisa wapas", "lifafa",
-    
+    # Devanagari
     "नकली", "असली", "शिकायत", "खराब", "टूट", "काम नहीं", "धोखा", "वापस",
 ]
 
@@ -151,7 +164,43 @@ def get_web_results(
         " helpline procedure how to report"
     )
 
+  # Certification-process and hallmarking questions were the two weakest
+  # spots in testing (irrelevant product content leaking in, missing step
+  # content). Both topics span several distinct BIS sub-schemes, and a
+  # generic query was letting the wrong sub-scheme's content get matched.
+  # Naming the specific sub-scheme terms narrows retrieval to the right page.
+  process_keywords = ""
+  if any(
+      k in lowered
+      for k in [
+          "certification process", "certification scheme", "how to get",
+          "how do i get", "how can i get", "isi mark", "apply for",
+          "get certified", "certification for", "license", "licence",
+          "steps", "step by step", "procedure", "process for", "process to",
+          "how to apply", "documents required", "application",
+      ]
+  ):
+    process_keywords = (
+        "product certification scheme Scheme-I Scheme-II Manak Online"
+        " application process documents required fee"
+    )
 
+  hallmark_keywords = ""
+  if any(
+      k in lowered
+      for k in [
+          "hallmark", "huid", "gold", "silver", "jewellery", "jewelry",
+          "ahc", "assaying",
+      ]
+  ):
+    hallmark_keywords = (
+        "hallmarking registration HUID Assaying and Hallmarking Centre AHC"
+        " BIS Care app jewellers"
+    )
+
+  # If this question leans on a pronoun ("it", "iske", "uska"...), the topic
+  # is probably in the previous turn — fold that in so search doesn't go in
+  # blind on things like "what's the penalty for not following it?".
   context_hint = ""
   if looks_like_followup(user_question):
     last_turn = _last_user_turn(chat_history_list)
@@ -161,7 +210,7 @@ def get_web_results(
   search_query = (
       f"Bureau of Indian Standards BIS active latest revision amended IS"
       f" standard QCO {context_hint} {user_question} {detail_keywords}"
-      f" {scenario_keywords}"
+      f" {scenario_keywords} {process_keywords} {hallmark_keywords}"
   ).strip()
   search_query = re.sub(r"\s+", " ", search_query)
 
@@ -177,7 +226,7 @@ def get_web_results(
     try:
       response = tavily_client.search(
           query=search_query,
-          search_depth="basic",  
+          search_depth="basic",  # lighter retry, less likely to time out again
           max_results=max_results,
           include_domains=list(TRUSTED_DOMAINS),
       )
@@ -197,7 +246,9 @@ def get_web_results(
     if not (title and url and content):
       continue
 
-
+    # Hard enforcement: the search API's include_domains is a hint, not a
+    # guarantee — drop anything that isn't actually on a trusted domain
+    # (this is what let Reddit/Facebook/random blogs through before).
     domain = urlparse(url).netloc.lower().lstrip("www.")
     if not any(domain == d or domain.endswith("." + d) for d in TRUSTED_DOMAINS):
       continue
@@ -242,10 +293,10 @@ def format_chat_history(chat_history_list: list) -> str:
     role_label = "User" if str(role).lower() == "user" else "Assistant"
     formatted.append(f"{role_label}: {content}")
 
-  return "\n".join(formatted[-8:])  
+  return "\n".join(formatted[-8:])  # last 4 exchanges (user+assistant pairs)
 
 
-
+# --- CLEAN & ROBUST PROMPT TEMPLATE ---
 prompt = PromptTemplate(
     template="""
 You are "BIS Sahayak", a warm, direct, and knowledgeable human consultant for the Bureau of Indian Standards (BIS). You talk like a helpful person, not a search engine — you never restate the question or repeat the same point twice.
@@ -296,6 +347,16 @@ You are "BIS Sahayak", a warm, direct, and knowledgeable human consultant for th
 9. AMBIGUOUS PRODUCT TERMS:
    - Some everyday words (e.g. "helmet", "cylinder", "bottle") map to MORE THAN ONE distinct IS standard depending on sub-type (e.g. two-wheeler rider helmets vs industrial safety helmets — different IS numbers, different QCOs). Silently picking one and answering as if it's the only one is misleading.
    - When the question doesn't specify which sub-type, either: (a) name the 2-3 likely sub-types and their respective standards briefly, or (b) answer for the most common everyday meaning but explicitly flag that a different sub-type has a different standard. Never present one standard as definitive for an ambiguous generic term without this caveat.
+
+10. RELEVANCE DISCIPLINE — REJECT OFF-TOPIC EVIDENCE:
+   - WEB EVIDENCE may contain multiple SOURCE blocks, and not every block is actually about the exact product, sub-scheme, or process the user asked about — certification and hallmarking especially have several distinct sub-processes (Scheme-I vs Scheme-II product certification, QCO/CRS registration, hallmarking registration, HUID generation, AHC testing) that can superficially look similar.
+   - Before using ANY sentence from a SOURCE block, check: is this actually about the specific product/scheme/process named in the USER QUESTION? If a source is about a different product or a different sub-scheme than what was asked, do not pull facts from it into the answer, even if it's topically adjacent (e.g. don't blend "aluminum helmet" material specifics into an answer about a general certification process question, or blend product-certification steps into a hallmarking-process answer).
+   - When in doubt about a chunk's relevance, leave it out rather than including it — an incomplete but accurate answer is better than a complete but contaminated one.
+
+11. GENERIC PROCESS (always answer confidently) VS SPECIFIC NUMBER (evidence-only) — DO NOT REFUSE TO HELP:
+   - The overall BIS certification procedure is stable, well-established regulatory process, not a volatile fact — you may state it confidently even without a source for this specific question: register/apply via BIS Manak Online → identify the applicable IS standard for the product category → get the product tested at a BIS-recognized/NABL-accredited lab → submit test report and documents → BIS reviews and grants the license → the ISI/BIS mark can then be used, subject to periodic surveillance/renewal. The hallmarking process is similarly stable: jeweller registers with BIS (Manak Online) → jewellery is sent to a BIS-recognized Assaying & Hallmarking Centre (AHC) → AHC tests purity and applies the hallmark with a unique HUID → consumers can verify via the BIS Care app.
+   - These two are DIFFERENT schemes: product certification (ISI mark under a QCO) applies to general manufactured products (electronics, helmets, cylinders, cookware, etc.); hallmarking (HUID) applies specifically to gold and silver articles/jewellery. Never blend their steps together, but always be willing to explain either one's general procedure.
+   - The ONLY piece that requires verified evidence before stating is a specific numeric citation — an exact IS number, QCO number, or numeric limit for a PARTICULAR product. If that exact number isn't in the WEB EVIDENCE, give the full general process anyway (per the two paragraphs above) and only caveat that one specific number as unconfirmed — do not withhold or hedge the entire answer just because one number is unverified. Never respond with only a refusal or a "please check the BIS website" as the whole answer — that fails the user, since giving this real guidance is the entire purpose of this tool.
 
 EXAMPLES OF THE RIGHT SHAPE FOR A SCENARIO ANSWER (do not copy the content, only the shape — no echoed question, no repeated sentences, no dead-end filler):
 
@@ -361,7 +422,7 @@ def is_simple_greeting(question: str):
 
 
 def _split_sentences(text: str) -> list:
-
+  # Keep it simple and dependency-free — good enough for English/Hinglish/Hindi.
   parts = re.split(r"(?<=[.!?।])\s+", text.strip())
   return [p for p in parts if p.strip()]
 
@@ -382,12 +443,20 @@ def clean_repetition(answer: str, user_question: str) -> str:
 
   list_item_pattern = re.compile(r"^\s*(\d+[\).]|[-*•])\s")
 
-
+  # Drop first sentence if it's basically just the user's question restated
+  # (but never touch it if it's itself a numbered step, e.g. answer starts
+  # directly with "1) ...").
+  # Threshold is intentionally high (0.8): short Hinglish/Hindi domain
+  # sentences naturally share a lot of vocabulary with the question even
+  # when they're genuine, different content (e.g. a real step 1 that just
+  # happens to mention "hallmark", "jewellery", "process" like the question
+  # does) — a looser threshold was wrongly deleting real step 1 content,
+  # producing numbering gaps like "2) ... 3) ..." with step 1 missing.
   if not list_item_pattern.match(sentences[0]):
     first_vs_question = difflib.SequenceMatcher(
         None, sentences[0].lower(), user_question.lower()
     ).ratio()
-    if first_vs_question > 0.6:
+    if first_vs_question > 0.8:
       sentences = sentences[1:]
 
   kept = []
@@ -406,6 +475,33 @@ def clean_repetition(answer: str, user_question: str) -> str:
 
   cleaned = " ".join(kept).strip()
   return cleaned if cleaned else answer
+
+
+# Matches "IS 4151", "IS 4151:2015", "IS 4151 (Part 1)" etc. — the pattern of
+# a specific standard citation. If the model states one of these while zero
+# sources were retrieved, it was recalled from training data, not verified
+# against current evidence. Rule 7 in the prompt already asks the model to
+# self-report this, but that isn't 100% reliable (as testing showed), so this
+# is the code-level backstop: a wrong recalled number looks identical to a
+# correct one without an explicit flag distinguishing the two.
+IS_NUMBER_PATTERN = re.compile(
+    r"\bIS\s?\d{3,6}(?:\s?\(Part[\s-]?\d+\))?(?::\d{4})?\b", re.IGNORECASE
+)
+
+
+def guard_unverified_standard_numbers(answer: str, results: list) -> str:
+  if results:
+    return answer
+  if IS_NUMBER_PATTERN.search(answer):
+    # Small caveat, not a refusal — the process guidance above it is still
+    # valid and confident; only the exact number is unverified.
+    caveat = (
+        " (Note: I couldn't verify this exact standard number against "
+        "current official sources — worth double-checking on BIS's "
+        "\"Know Your Standard\" portal before relying on it for compliance.)"
+    )
+    return answer.rstrip() + "\n\n" + caveat.strip()
+  return answer
 
 
 def ask_question(user_question: str, chat_history_list=None):
@@ -443,6 +539,7 @@ def ask_question(user_question: str, chat_history_list=None):
       answer = clean_repetition(answer, user_question)
       sources = [r.get("url") for r in results if r.get("url")]
       sources = list(dict.fromkeys(sources))  # dedupe, keep order
+      answer = guard_unverified_standard_numbers(answer, results)
 
     return answer, sources
 
