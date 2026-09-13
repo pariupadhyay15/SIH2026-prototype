@@ -8,14 +8,7 @@ from tavily import TavilyClient
 
 from app.config import llm
 
-# Trusted domains — enforced in CODE, not just requested from the search API,
-# since the search provider does not always honor include_domains strictly.
-# Added consumer-grievance and quality-accreditation bodies (verified) so
-# complaint/scenario answers can cite real official redressal channels too.
-# NOTE: corpbiz.io and alephindia.in were removed — they are private paid
-# certification-consultancy companies, not government/BIS sources. Mixing
-# their content into hallmarking/certification answers was diluting answer
-# quality and credibility for exactly those two query types.
+
 TRUSTED_DOMAINS = {
     "bis.gov.in",
     "standards.bis.gov.in",
@@ -23,11 +16,11 @@ TRUSTED_DOMAINS = {
     "crsbis.in",
     "pib.gov.in",
     "egazette.gov.in",
-    "consumeraffairs.gov.in",   # Dept. of Consumer Affairs (current official domain)
-    "consumeraffairs.nic.in",   # same department, older domain, still live
-    "ncdrc.nic.in",             # National Consumer Disputes Redressal Commission
-    "qcin.org",                 # Quality Council of India (accreditation body)
-    "india.gov.in",             # National Portal of India
+    "consumeraffairs.gov.in",  
+    "consumeraffairs.nic.in",   
+    "ncdrc.nic.in",             
+    "qcin.org",                 
+    "india.gov.in",             
 }
 
 load_dotenv()
@@ -39,10 +32,7 @@ if not tavily_api_key:
 tavily_client = TavilyClient(api_key=tavily_api_key)
 
 
-# --- LANGUAGE DETECTION (rule-based, not left to the LLM alone) ---
-# STRONG markers are Hindi/Hinglish function words and common verb forms that
-# almost never appear in genuine English sentences — a single hit is enough.
-# WEAK markers are more ambiguous, so we still require 2+ of those alone.
+
 STRONG_HINGLISH_MARKERS = [
     "nahi", "nahin", "nhi", "kya", "hai", "hain", "kar", "karo", "karna",
     "kro", "raha", "rahi", "rha", "rhi", "liye", "mera", "meri", "apna",
@@ -53,7 +43,7 @@ STRONG_HINGLISH_MARKERS = [
     "mujhe", "aapko", "humein", "unhe", "kuch", "sab", "bhi", "toh",
 ]
 
-# Weaker, more ambiguous overlap words — need 2+ together to count.
+
 WEAK_HINGLISH_MARKERS = ["ye", "sahi", "galat", "se", "ko", "ka", "ki", "ke"]
 
 
@@ -79,23 +69,19 @@ def detect_language(text: str) -> str:
   return "english"
 
 
-# --- SCENARIO DETECTION (complaints, fraud, real-life situations) ---
-# Includes English, Hinglish, and Devanagari phrasings — a purely English
-# keyword list misses most real Hinglish complaints (e.g. "kaam nahi kar
-# raha", "nakli", "toot gaya"), which was causing the model to ramble
-# instead of using the structured step-by-step format.
+
 SCENARIO_KEYWORDS = [
-    # English
+    
     "no record found", "fake", "fraud", "cheated", "scam", "duplicate",
     "not working", "denied", "rejected", "complaint", "problem", "issue",
     "missing", "lost", "damaged", "refused", "wrong", "expired", "invalid",
     "doesn't match", "not matching", "mismatch", "broke", "broken", "crack",
     "cracked", "return", "refund", "leak", "leaking",
-    # Hinglish
+    
     "nakli", "asli", "shikayat", "galat", "kharab", "toot", "tut gaya",
     "kaam nahi", "chal nahi raha", "dhoka", "jhooth", "fatt gaya",
     "khareeda", "wapas", "paisa wapas", "lifafa",
-    # Devanagari
+    
     "नकली", "असली", "शिकायत", "खराब", "टूट", "काम नहीं", "धोखा", "वापस",
 ]
 
@@ -164,11 +150,7 @@ def get_web_results(
         " helpline procedure how to report"
     )
 
-  # Certification-process and hallmarking questions were the two weakest
-  # spots in testing (irrelevant product content leaking in, missing step
-  # content). Both topics span several distinct BIS sub-schemes, and a
-  # generic query was letting the wrong sub-scheme's content get matched.
-  # Naming the specific sub-scheme terms narrows retrieval to the right page.
+
   process_keywords = ""
   if any(
       k in lowered
@@ -198,9 +180,7 @@ def get_web_results(
         " BIS Care app jewellers"
     )
 
-  # If this question leans on a pronoun ("it", "iske", "uska"...), the topic
-  # is probably in the previous turn — fold that in so search doesn't go in
-  # blind on things like "what's the penalty for not following it?".
+
   context_hint = ""
   if looks_like_followup(user_question):
     last_turn = _last_user_turn(chat_history_list)
@@ -226,7 +206,7 @@ def get_web_results(
     try:
       response = tavily_client.search(
           query=search_query,
-          search_depth="basic",  # lighter retry, less likely to time out again
+          search_depth="basic",  
           max_results=max_results,
           include_domains=list(TRUSTED_DOMAINS),
       )
@@ -246,9 +226,7 @@ def get_web_results(
     if not (title and url and content):
       continue
 
-    # Hard enforcement: the search API's include_domains is a hint, not a
-    # guarantee — drop anything that isn't actually on a trusted domain
-    # (this is what let Reddit/Facebook/random blogs through before).
+    
     domain = urlparse(url).netloc.lower().lstrip("www.")
     if not any(domain == d or domain.endswith("." + d) for d in TRUSTED_DOMAINS):
       continue
@@ -293,10 +271,10 @@ def format_chat_history(chat_history_list: list) -> str:
     role_label = "User" if str(role).lower() == "user" else "Assistant"
     formatted.append(f"{role_label}: {content}")
 
-  return "\n".join(formatted[-8:])  # last 4 exchanges (user+assistant pairs)
+  return "\n".join(formatted[-8:]) 
 
 
-# --- CLEAN & ROBUST PROMPT TEMPLATE ---
+
 prompt = PromptTemplate(
     template="""
 You are "BIS Sahayak", a warm, direct, and knowledgeable human consultant for the Bureau of Indian Standards (BIS). You talk like a helpful person, not a search engine — you never restate the question or repeat the same point twice.
@@ -422,7 +400,7 @@ def is_simple_greeting(question: str):
 
 
 def _split_sentences(text: str) -> list:
-  # Keep it simple and dependency-free — good enough for English/Hinglish/Hindi.
+  
   parts = re.split(r"(?<=[.!?।])\s+", text.strip())
   return [p for p in parts if p.strip()]
 
@@ -443,15 +421,7 @@ def clean_repetition(answer: str, user_question: str) -> str:
 
   list_item_pattern = re.compile(r"^\s*(\d+[\).]|[-*•])\s")
 
-  # Drop first sentence if it's basically just the user's question restated
-  # (but never touch it if it's itself a numbered step, e.g. answer starts
-  # directly with "1) ...").
-  # Threshold is intentionally high (0.8): short Hinglish/Hindi domain
-  # sentences naturally share a lot of vocabulary with the question even
-  # when they're genuine, different content (e.g. a real step 1 that just
-  # happens to mention "hallmark", "jewellery", "process" like the question
-  # does) — a looser threshold was wrongly deleting real step 1 content,
-  # producing numbering gaps like "2) ... 3) ..." with step 1 missing.
+
   if not list_item_pattern.match(sentences[0]):
     first_vs_question = difflib.SequenceMatcher(
         None, sentences[0].lower(), user_question.lower()
@@ -462,7 +432,7 @@ def clean_repetition(answer: str, user_question: str) -> str:
   kept = []
   for sentence in sentences:
     if list_item_pattern.match(sentence):
-      kept.append(sentence)  # numbered/bulleted steps are never deduped
+      kept.append(sentence)  
       continue
     is_dupe = any(
         difflib.SequenceMatcher(None, sentence.lower(), prior.lower()).ratio()
@@ -477,13 +447,6 @@ def clean_repetition(answer: str, user_question: str) -> str:
   return cleaned if cleaned else answer
 
 
-# Matches "IS 4151", "IS 4151:2015", "IS 4151 (Part 1)" etc. — the pattern of
-# a specific standard citation. If the model states one of these while zero
-# sources were retrieved, it was recalled from training data, not verified
-# against current evidence. Rule 7 in the prompt already asks the model to
-# self-report this, but that isn't 100% reliable (as testing showed), so this
-# is the code-level backstop: a wrong recalled number looks identical to a
-# correct one without an explicit flag distinguishing the two.
 IS_NUMBER_PATTERN = re.compile(
     r"\bIS\s?\d{3,6}(?:\s?\(Part[\s-]?\d+\))?(?::\d{4})?\b", re.IGNORECASE
 )
@@ -493,8 +456,7 @@ def guard_unverified_standard_numbers(answer: str, results: list) -> str:
   if results:
     return answer
   if IS_NUMBER_PATTERN.search(answer):
-    # Small caveat, not a refusal — the process guidance above it is still
-    # valid and confident; only the exact number is unverified.
+
     caveat = (
         " (Note: I couldn't verify this exact standard number against "
         "current official sources — worth double-checking on BIS's "

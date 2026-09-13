@@ -3,7 +3,7 @@ import math
 import os
 from typing import List, Optional
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query , HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -12,6 +12,7 @@ from app.mock_huid_db import MOCK_HUID_DB
 from app.mock_license_db import MOCK_LICENSE_DB
 from app.rag_service import ask_question
 from app.schemas import HUIDRequest, LicenseRequest, VerificationResponse
+from app.standards_search import search_bis_standards
 
 
 
@@ -216,3 +217,19 @@ def get_compliance_journey(product_id: str):
       ),
       "data": None,
   }
+
+class SearchRequest(BaseModel):
+    query: str
+
+@app.post("/standards/search")
+def get_standards(payload: SearchRequest):
+    try:
+        data = search_bis_standards(payload.query)
+        return data
+    except Exception as e:
+        # Print error to terminal logs and return a clean JSON error response
+        print(f"Error in /standards/search: {str(e)}")
+        raise HTTPException(
+            status_code=500, 
+            detail=f"Internal Search Error: {str(e)}"
+        )
